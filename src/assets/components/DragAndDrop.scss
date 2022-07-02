@@ -1,0 +1,52 @@
+.div-groups-container{
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 320px;
+    background-color: lightgreen;
+    position: absolute;
+    top: 20px;
+    left: 200px;
+    justify-content: center;
+}   
+
+.div-group-container{
+    background-color: wheat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+.div-group-list{
+    padding: 4px;
+    width: 120px;
+    // min-height: 100px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.div-card-technical{
+    border: 1px solid gray;
+    border-radius: 10px;
+    font-size: 16px;
+    user-select: none;
+    text-align: center;
+    padding: 12px;
+    margin: 5px;
+    color: white;
+    background-color: gray;
+   
+}
+
+.p-leader-group{
+    background-color: rgb(69, 69, 69);
+    font-size: 12px;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 5px;
+    
+}
