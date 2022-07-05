@@ -5,12 +5,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { DragAndDrop } from "./components/DragAndDrop";
 import { DragAndDropStatus } from "./components/DragAndDropStatus";
+import { DragAndDrop1 } from "./components/DragAndDrop-1";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
   // <DragAndDrop />
   <DragAndDropStatus />
+  // <DragAndDrop1 />
   // </React.StrictMode>
 );
 

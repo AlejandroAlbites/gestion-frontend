@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "../assets/components/DragAndDropStatus.scss";
-// import { DragAndDrop, groupsFromBackend } from "./DragAndDrop";
+import { DragAndDrop } from "./DragAndDrop";
 
 const technicalsFromBackend = [
   {
@@ -19,22 +19,6 @@ const technicalsFromBackend = [
   {
     id: "4",
     name: "lucas",
-  },
-  {
-    id: "5",
-    name: "jorge",
-  },
-  {
-    id: "6",
-    name: "jesus",
-  },
-  {
-    id: "7",
-    name: "victor",
-  },
-  {
-    id: "8",
-    name: "carlos",
   },
 ];
 
@@ -54,23 +38,18 @@ const groupsFromBackend = [
     name: "group3",
     technicals: [],
   },
-  {
-    id: "126",
-    name: "group4",
-    technicals: [],
-  },
 ];
 
 const statusFromBackend = [
   {
     id: "12345",
     name: "Lista de personal",
-    groups: [],
+    groups: groupsFromBackend,
   },
   {
     id: "12445",
     name: "En Espera",
-    groups: groupsFromBackend,
+    groups: [],
   },
   {
     id: "12545",
@@ -80,6 +59,7 @@ const statusFromBackend = [
 ];
 
 const onDragEnd = (result, statusGroup, setStatusGroup) => {
+  console.log(result);
   if (!result.destination) {
     return;
   }
@@ -117,47 +97,45 @@ const onDragEnd = (result, statusGroup, setStatusGroup) => {
   }
 };
 
-const onDragEndTec = (result, groups, setgroups) => {
+const onDragEndTec = (result, statusGroup, setStatusGroup) => {
+  console.log(result);
   if (!result.destination) {
     return;
   }
+
   const { source, destination } = result;
-  if (source.droppableId !== destination.droppableId) {
-    const sourcegroup = groups[source.droppableId];
-    const destinationgroup = groups[destination.droppableId];
-    const sourcetechnicals = [...sourcegroup.technicals];
-    const desttechnicals = [...destinationgroup.technicals];
-    const [removed] = sourcetechnicals.splice(source.index, 1);
-    desttechnicals.splice(destination.index, 0, removed);
-    setgroups({
-      ...groups,
-      [source.droppableId]: {
-        ...sourcegroup,
-        technicals: sourcetechnicals,
-      },
-      [destination.droppableId]: {
-        ...destinationgroup,
-        technicals: desttechnicals,
-      },
-    });
-  } else {
-    const group = groups[source.droppableId];
-    const copiedItems = [...group.technicals];
-    const [removed] = copiedItems.splice(source.index, 1);
-    copiedItems.splice(destination.index, 0, removed);
-    setgroups({
-      ...groups,
-      [source.droppableId]: {
-        ...group,
-        technicals: copiedItems,
-      },
-    });
-  }
+
+  const statusGroupArray = Object.entries(statusGroup).map((item) => item[1])[
+    source.droppableId[0]
+  ].groups;
+  console.log(statusGroupArray);
+  const group = statusGroupArray.filter(
+    (item) => item.id === source.droppableId[1]
+  )[0];
+
+  const copiedItems = [...group.technicals];
+  const [removed] = copiedItems.splice(source.index, 1);
+  copiedItems.splice(destination.index, 0, removed);
+  console.log(copiedItems);
+
+  const status = statusGroup[source.droppableId[0]];
+
+  //TO DO : setear datos de nuevo orden de tecnicos ()
+  // setStatusGroup({
+  //   ...statusGroup,
+  //   [source.droppableId[0]]: {
+  //     ...status,
+  //     groups: {
+  //       ...statusGroupArray,
+  //       group: { ...group, technicals: copiedItems },
+  //     },
+  //   },
+  // });
 };
 
 export const DragAndDropStatus = () => {
   const [statusGroup, setStatusGroup] = useState(statusFromBackend);
-  const [groups, setgroups] = useState(groupsFromBackend);
+
   return (
     <div className="div-status-general-container">
       <DragDropContext
@@ -171,7 +149,11 @@ export const DragAndDropStatus = () => {
               <Droppable droppableId={id}>
                 {(provided) => {
                   return (
-                    <div {...provided.droppableProps} ref={provided.innerRef}>
+                    <div
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                      className="div-groups-container"
+                    >
                       {state.groups.map((group, index) => {
                         return (
                           <Draggable
@@ -185,17 +167,20 @@ export const DragAndDropStatus = () => {
                                   className="div-group-container"
                                   ref={provided.innerRef}
                                   {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
                                 >
                                   <DragDropContext
-                                    onDragEnd={
-                                      (result) =>
-                                        onDragEndTec(result, groups, setgroups)
-                                      //   console.log(result)
+                                    onDragEnd={(result) =>
+                                      onDragEndTec(
+                                        result,
+                                        statusGroup,
+                                        setStatusGroup
+                                      )
                                     }
                                   >
-                                    {group.name}
-                                    <Droppable droppableId={group.id}>
+                                    <h2 {...provided.dragHandleProps}>
+                                      {group.name}
+                                    </h2>
+                                    <Droppable droppableId={[id, group.id]}>
                                       {(provided) => {
                                         return (
                                           <div

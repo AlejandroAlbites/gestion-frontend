@@ -1,12 +1,11 @@
 .div-groups-container{
+    background-color: rgb(251, 247, 204);
+    // min-height: 10px;
     border-radius: 20px;
     display: flex;
-    flex-wrap: wrap;
-    width: 320px;
-    background-color: lightgreen;
-    position: absolute;
-    top: 20px;
-    left: 200px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
     justify-content: center;
 }   
 
@@ -22,7 +21,6 @@
 .div-group-list{
     padding: 4px;
     width: 120px;
-    // min-height: 100px;
     margin: 5px;
     display: flex;
     flex-direction: column;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import "../assets/components/DragAndDrop.scss";
+import "../assets/components/DragAndDropStatus.scss";
+// import { DragAndDrop, groupsFromBackend } from "./DragAndDrop";
 
 const technicalsFromBackend = [
   {
@@ -37,10 +38,10 @@ const technicalsFromBackend = [
   },
 ];
 
-export const groupsFromBackend = [
+const groupsFromBackend = [
   {
     id: "123",
-    name: "Los gosus",
+    name: "group1",
     technicals: technicalsFromBackend,
   },
   {
@@ -60,89 +61,99 @@ export const groupsFromBackend = [
   },
 ];
 
-const onDragEnd = (result, groups, setgroups) => {
+const statusFromBackend = [
+  {
+    id: "12345",
+    name: "Lista de personal",
+    groups: groupsFromBackend,
+  },
+  {
+    id: "12445",
+    name: "En Espera",
+    groups: [],
+  },
+  {
+    id: "12545",
+    name: "En ejecucion",
+    groups: [],
+  },
+];
+
+const onDragEnd = (result, statusGroup, setStatusGroup) => {
   if (!result.destination) {
     return;
   }
   const { source, destination } = result;
-
   if (source.droppableId !== destination.droppableId) {
-    const sourceGroup = groups[source.droppableId];
-    const sourceTechnicals = [...sourceGroup.technicals];
-
-    const destinationGroup = groups[destination.droppableId];
-    const destinationTechnicals = [...destinationGroup.technicals];
-
-    const [technicalRemoved] = sourceTechnicals.splice(source.index, 1);
-    destinationTechnicals.splice(destination.index, 0, technicalRemoved);
-
-    setgroups({
-      ...groups,
+    const sourceStatus = statusGroup[source.droppableId];
+    const destinationStatus = statusGroup[destination.droppableId];
+    const sourcegroups = [...sourceStatus.groups];
+    const destgroups = [...destinationStatus.groups];
+    const [removed] = sourcegroups.splice(source.index, 1);
+    destgroups.splice(destination.index, 0, removed);
+    setStatusGroup({
+      ...statusGroup,
       [source.droppableId]: {
-        ...sourceGroup,
-        technicals: sourceTechnicals,
+        ...sourceStatus,
+        groups: sourcegroups,
       },
       [destination.droppableId]: {
-        ...destinationGroup,
-        technicals: destinationTechnicals,
+        ...destinationStatus,
+        groups: destgroups,
       },
     });
   } else {
-    const selectedGroup = groups[source.droppableId];
-    // console.log(selectedGroup);
-    const currentTechnicals = [...selectedGroup.technicals];
-    const [technicalRemoved] = currentTechnicals.splice(source.index, 1);
-    currentTechnicals.splice(destination.index, 0, technicalRemoved);
-    setgroups({
-      ...groups,
+    const status = statusGroup[source.droppableId];
+    const copiedItems = [...status.groups];
+    const [removed] = copiedItems.splice(source.index, 1);
+    copiedItems.splice(destination.index, 0, removed);
+    setStatusGroup({
+      ...statusGroup,
       [source.droppableId]: {
-        ...selectedGroup,
-        technicals: currentTechnicals,
+        ...status,
+        groups: copiedItems,
       },
     });
   }
 };
 
-export const DragAndDrop = () => {
-  const [groups, setgroups] = useState(groupsFromBackend);
+export const DragAndDrop1 = () => {
+  const [statusGroup, setStatusGroup] = useState(statusFromBackend);
+  const [newGroups, setNewGroups] = useState([]);
   return (
-    <div className="div-groups-container">
+    <div className="div-status-general-container">
       <DragDropContext
-        onDragEnd={(result) => onDragEnd(result, groups, setgroups)}
+        onDragEnd={(result) => onDragEnd(result, statusGroup, setStatusGroup)}
       >
-        {Object.entries(groups).map(([id, group]) => {
+        {Object.entries(statusGroup).map(([id, state]) => {
           return (
-            <div key={id} className="div-group-container">
-              <h2>{group.name}</h2>
+            <div key={id} className="div-status-container">
+              <h2>{state.name}</h2>
+
               <Droppable droppableId={id}>
                 {(provided) => {
                   return (
                     <div
                       {...provided.droppableProps}
                       ref={provided.innerRef}
-                      className="div-group-list"
+                      className="div-groups-container"
                     >
-                      {group.technicals.map((technical, index) => {
+                      {state.groups.map((group, index) => {
                         return (
                           <Draggable
-                            key={technical.id}
-                            draggableId={technical.id}
+                            key={group.id}
+                            draggableId={group.id}
                             index={index}
                           >
                             {(provided) => {
                               return (
                                 <div
+                                  className="div-group-container"
                                   ref={provided.innerRef}
                                   {...provided.draggableProps}
                                   {...provided.dragHandleProps}
-                                  className="div-card-technical"
                                 >
-                                  {index === 0 && (
-                                    <p className="p-leader-group">
-                                      Team Leader
-                                    </p>
-                                  )}
-                                  {technical.name}
+                                  {group.name}
                                 </div>
                               );
                             }}
