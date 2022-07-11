@@ -1,0 +1,82 @@
+.div-container-group{
+    background-color: rgb(255, 172, 172);
+    margin: 8px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    width: 80px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 220px;
+    // max-height: 220px;
+    h2{
+        padding: 8px;
+        font-size: 13px;
+    }
+    .div-list-task{
+        padding: 4px;
+    }
+}
+
+.div-group-technicals-list{
+    background-color: rgb(255, 172, 172);
+    margin: 8px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    // width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h2{
+        padding: 8px;
+        font-size: 13px;
+    }
+
+}
+
+.div-technical-container{
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 4px;
+    margin-bottom: 8px;
+    background-color: white;
+    flex-grow: 1;
+    min-height: 20px;
+    font-size: 12px;
+    // width: 80%;
+}
+.status-container{
+    display: flex;
+}
+.div-groups-droppable-container{
+    display: flex;
+    background-color: lightcyan;
+    width: 100%;
+    // align-items: center;
+
+}
+
+.div-status-groups-container{
+
+    margin-top: 50px;
+    margin-left: 50px;
+
+    background-color: lightgray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 8px;
+    width: 40%;
+}
+
+
+.p-leader-group{
+    background-color: lightgray;
+    font-size: 11px;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 5px;
+    
+}
