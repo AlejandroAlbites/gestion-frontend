@@ -48,3 +48,13 @@ const initialData = {
 };
 
 export default initialData;
+
+// let technicians = {}
+// mongoTech.forEach(tech => {
+//     technicians[tech.id] : {
+//       id: tech.id, name: tech.name
+//     }
+//   }
+// }
+
+// return technicians
