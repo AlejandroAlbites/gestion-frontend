@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import initialData from "../components/projectPage/initial-data";
-import { Groups } from "../components/projectPage/Groups";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import "../assets/styles/pages/ProjectPage.scss";
+import React, { useState } from 'react';
+import initialData from '../components/projectPage/initial-data';
+import { Groups } from '../components/projectPage/Groups';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import '../assets/styles/pages/ProjectPage.scss';
 
-export const ProyectPage = () => {
+export const ProjectPage = () => {
   const [state, setState] = useState(initialData);
 
   const onDragEnd = (result) => {
@@ -19,7 +19,7 @@ export const ProyectPage = () => {
     }
 
     // Drag and Drop DE GRUPOS ENTRE ESTADOS
-    if (type === "group") {
+    if (type === 'group') {
       const groupPositionStart = state.status[source.droppableId];
       const groupPositionFinish = state.status[destination.droppableId];
 
@@ -130,8 +130,7 @@ export const ProyectPage = () => {
               key={statusOrder.id}
               droppableId={statusOrder.id}
               direction="horizontal"
-              type="group"
-            >
+              type="group">
               {(provided) => {
                 return (
                   <div className="div-status-groups-container">
@@ -139,8 +138,7 @@ export const ProyectPage = () => {
                     <div
                       className="div-groups-droppable-container"
                       {...provided.droppableProps}
-                      ref={provided.innerRef}
-                    >
+                      ref={provided.innerRef}>
                       {statusOrder.groupsIds.map((groupId, index) => {
                         const group = state.groups[groupId];
                         const technicals = group.techIds.map(
