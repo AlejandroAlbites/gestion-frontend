@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Button, Group } from '@mantine/core';
-
+import { Modal } from '@mantine/core';
 import logo3 from '../../assets/images/logo3.png';
 import '../../assets/styles/components/LandingPage/HeaderBar.scss';
 import { Registerform } from './Registerform';
@@ -17,11 +16,11 @@ export const HeaderBar = () => {
           <button onClick={() => setOpenedLogin(true)}>
             Acerca de nosotros
           </button>
-          {/* <span>|</span> */}
           <button onClick={() => setOpenedRegister(true)}>Clientes</button>
         </div>
 
         <div className="div-header-bar-options">
+          <span className='separation'>-----------</span>
           <Modal
             opened={openedLogin}
             onClose={() => setOpenedLogin(false)}
@@ -29,7 +28,7 @@ export const HeaderBar = () => {
             <LoginForm />
           </Modal>
           <button onClick={() => setOpenedLogin(true)}>Iniciar</button>
-          <span>|</span>
+          <span className='separation auth'>|</span>
           <Modal
             opened={openedRegister}
             onClose={() => setOpenedRegister(false)}
