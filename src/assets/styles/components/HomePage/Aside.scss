@@ -1,0 +1,55 @@
+.section-aside-container{
+    position: relative;
+    background-color: #6DDBCD;
+    width: 280px;
+    height: 100%;
+}
+
+.div-aside-container{
+    margin: 10px;
+    h1{
+        text-align: center;
+        margin-top: 15px;
+        color: white;
+        font-weight: bolder;
+    }
+    h2{     
+        margin-top: 15px;
+        color: white;
+        font-weight: bolder;
+        font-size: 16px;
+        // text-shadow: 0px 0px 1px gray;
+    }
+    hr{
+        margin-top: 20px;
+    }
+    span{
+        position: relative;
+        left: 90% ;
+        cursor: pointer;
+        color: white;
+        font-weight: bolder;
+        font-size: 25px;
+        &:hover{
+            color: rgb(71, 71, 71);
+        }
+    }
+}
+.div-logo-aside-container{
+    background-color: white;
+    border: none;
+    box-shadow: 1px 1px 10px 0px gray;
+    border-radius: 20px;
+    margin-top: 15px;
+    img{
+        width: 250px;
+        height: 200px;
+    }
+}
+
+.btn-user-options{
+    cursor: pointer;
+    &:hover{
+        color: rgb(71, 71, 71);
+    }
+}
