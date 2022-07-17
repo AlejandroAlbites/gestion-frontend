@@ -1,47 +1,55 @@
-.section-footer-content{
+@import "./../../abstracts/mixins";
+@import "./../../abstracts/variables";
+
+.section-footer-content {
     background-color: white;
-    // background-color: #dbedff;
+    position: relative;
     width: 100%;
-    height: 60px;
-    position: fixed;
     bottom: 0;
 }
 
-.div-footer-content{
-    // background-color: #42A5FF;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
-    img{
-        width: 40px;
-    }
-}
-
-.div-footer-information{
+.div-footer-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #42A5FF;
-    span{
-        font-size: 14px;
+    gap: 1.5rem;
+    height: 100%;
+    padding: 1rem;
+
+    @include md {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    img {
+        width: 70px;
+    }
+}
+
+.div-footer-information {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #42a5ff;
+    font-size: 18px;
+    span {
         cursor: pointer;
-        &:hover{
+        &:hover {
             color: #0075c2;
         }
     }
-    p{
-        font-size: 12px;
+    p {
         margin-top: 5px;
     }
 }
-.div-footer-icon{
-    color: #42A5FF;
+.div-footer-icon {
+    color: #42a5ff;
     cursor: pointer;
-    span{
+    span {
         margin: 0 5px;
-        font-size: 20px;
-        &:hover{
+        font-size: 28px;
+        &:hover {
             color: #0075c2;
         }
     }
