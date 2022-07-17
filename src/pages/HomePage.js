@@ -5,6 +5,7 @@ import { TablesProjects } from '../components/HomePage/TablesProjects';
 import { getUsersIdAction } from '../store/actions/actionsAuth';
 import '../assets/styles/pages/HomePage.scss';
 import { getProjectsAction } from '../store/actions/actionsProject';
+import { getTechniciansAction } from '../store/actions/actionsTechnician';
 
 export const HomePage = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ export const HomePage = () => {
   useEffect(() => {
     dispatch(getUsersIdAction());
     dispatch(getProjectsAction());
+    dispatch(getTechniciansAction());
   }, [dispatch]);
   return (
     <main className="main-home-page-container">

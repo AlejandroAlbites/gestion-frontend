@@ -27,7 +27,6 @@ export const ModalNewProject = ({ setOpened }) => {
           Nombra tu proyecto
         </label>
         <input
-          data-cy="email"
           className="mainForm__form-input"
           type="text"
           name="name"
