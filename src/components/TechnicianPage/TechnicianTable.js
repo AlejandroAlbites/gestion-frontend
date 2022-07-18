@@ -45,7 +45,7 @@ export const TechnicianTable = () => {
         {technicians &&
           technicians.map((technician) => {
             return (
-              <tbody key={technician.id}>
+              <tbody key={technician._id}>
                 <tr className="table-manage-projects-body">
                   <td> {technician.name}</td>
                   <td> {technician.lastName}</td>

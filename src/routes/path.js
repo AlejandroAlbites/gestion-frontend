@@ -1,4 +1,4 @@
 export const LANDINPAGE = '/';
-export const HOME = '/home';
-export const TECHNICIANS = '/home/technicians';
-export const PROJECT = '/home/project';
+export const HOME = '/';
+export const TECHNICIANS = 'technicians';
+export const PROJECT = 'project/:id';
