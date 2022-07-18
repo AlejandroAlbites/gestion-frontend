@@ -1,60 +1,54 @@
-.div-manage-projects-container{
-    background-color: rgb(245, 245, 245);
-    width: 1000px;
+@import "./../../abstracts/mixins";
+@import "./../../abstracts/variables";
+
+.div-manage-projects-container {
     min-height: 200px;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
 }
-.div-btn-container{
-    display: flex;
-    justify-content: space-between;
-    margin: 8px;
-    button {
-        cursor: pointer;
-        border: none;
-        border-radius: 4px;
-        background-color: #6DDBCD;
-        color: white;
-        padding: 6px 4px;
-        &:hover{
-            background-color: #3bbbaa;
-        }
-    }
-}
 
-.table-manage-projects-container{
+.table-container {
+    overflow-x: auto;
+}
+.table-manage-projects-container {
     margin: 10px;
-    
     border-radius: 10px;
     border-collapse: collapse;
     background-color: white;
+    width: 100%;
+    overflow-x: auto;
 }
-.table-manage-projects-header{
-    border-bottom: 2px solid #6DDBCD;
-    th{
+.table-manage-projects-header {
+    border-bottom: 2px solid #6ddbcd;
+    th {
         padding: 10px;
     }
 }
 
-.table-manage-projects-body{
+.table-manage-projects-body {
     text-align: center;
-    td{
+    td {
         padding: 10px;
+        text-align: left;
     }
 }
 
-.table-btn-options{
+.table-btn-options {
     display: flex;
-    justify-content: space-around;
+    gap: 0.5rem;
+    flex-direction: column;
+    @include md {
+        flex-direction: row;
+    }
     .table-btn-view {
         cursor: pointer;
         border: none;
         border-radius: 4px;
-        background-color: #6DDBCD;
+        background-color: #6ddbcd;
         color: white;
         padding: 4px 12px;
-        &:hover{
+        &:hover {
             background-color: #3bbbaa;
         }
     }
@@ -65,7 +59,7 @@
         background-color: rgb(228, 0, 0);
         color: white;
         padding: 4px;
-        &:hover{
+        &:hover {
             background-color: rgb(190, 0, 0);
         }
     }

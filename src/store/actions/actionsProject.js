@@ -10,7 +10,7 @@ export function createProjectAction(data) {
         return false;
       }
       const response = await axios.post(
-        `http://localhost:8080/api/project`,
+        `${BASE_URL}/api/project`,
         {
           name: data.name,
         },
@@ -46,7 +46,7 @@ export function getProjectsAction() {
       if (!token) {
         return false;
       }
-      const response = await axios.get(`http://localhost:8080/api/project`, {
+      const response = await axios.get(`${BASE_URL}/api/project`, {
         headers: {
           authorization: `Bearer ${token}`,
         },

@@ -3,41 +3,57 @@ import '../../assets/styles/components/HomePage/Aside.scss';
 import logo1 from '../../assets/images/logo1.png';
 import { logoutUser } from '../../store/actions/actionsAuth';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
 export const Aside = () => {
   const dispatch = useDispatch();
 
-  
+  const [showAsideMenu, setShowAsideMenu] = useState(false);
+
+
   const handleClickLogout = () => {
     dispatch(logoutUser());
   };
 
+  const handleMenu = () => {
+    setShowAsideMenu(!showAsideMenu)
+  }
+
   return (
-    <section className="section-aside-container">
-      <div className="div-aside-container">
-        <span>
-          <i className="fa-solid fa-circle-arrow-left"></i>
-        </span>
-        <div className="div-logo-aside-container">
-          <img src={logo1} alt="logo1" loading="lazy" />
+    <>
+      <i class={`fa-solid fa-bars menu ${!showAsideMenu && ('active')}`} onClick={() => handleMenu()}></i>
+      <section className={`section-aside-container  ${showAsideMenu && ('active')}`}>
+        <div className="div-aside-container">
+          <span>
+            <i className="fa-solid fa-circle-arrow-left hide_menu" onClick={() => handleMenu()}></i>
+          </span>
+          <div className="div-logo-aside-container">
+            <img src={logo1} alt="logo1" loading="lazy" />
+          </div>
+          <div className='info-summary'>
+            <h1>EASE GROUP</h1>
+            <h2>Información</h2>
+            <ul>
+              <li><i class="fa-solid fa-check"></i> Nombre: Juan </li>
+              <li><i class="fa-solid fa-check"></i> Correo : correo@correo.com </li>
+              <li><i class="fa-solid fa-check"></i> Proyectos: 0</li>
+              <li><i class="fa-solid fa-check"></i> Grupos de trabajo: 10 </li>
+              <li><i class="fa-solid fa-check"></i> Personal Técnico: 32 </li>
+            </ul>
+          </div>
+          <div className='configuration'>
+            <h2 className='btn-user-options-title'>Configuración</h2>
+            <h2 className="btn-user-options"><i class="fa-solid fa-user-pen"></i>Editar Perfil</h2>
+            <h2 className="btn-user-options"><i class="fa-solid fa-key"></i>Cambiar Contraseña</h2>
+            <h2 className="btn-user-options"><i class="fa-solid fa-question"></i>Ver Ayuda</h2>
+            <h2
+              className="btn-user-options"
+              type="button"
+              onClick={handleClickLogout}>
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>Salir
+            </h2>
+          </div>
         </div>
-        <h1>EASE GROUP</h1>
-        <h2>Nombre: Juan </h2>
-        <h2>Correo : correo@correo.com</h2>
-        <h2>Proyectos: 0</h2>
-        <h2>Grupos de trabajo: 10</h2>
-        <h2>Personal Técnico: 32</h2>
-        <hr />
-        <h2 className="btn-user-options">Editar Perfil</h2>
-        <h2 className="btn-user-options">Cambiar Contraseña</h2>
-        <h2 className="btn-user-options">Ver Ayuda</h2>
-        <h2
-          className="btn-user-options"
-          type="button"
-          onClick={handleClickLogout}>
-          Salir
-        </h2>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
