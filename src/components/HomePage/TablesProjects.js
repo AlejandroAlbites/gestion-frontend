@@ -27,7 +27,7 @@ export const TablesProjects = () => {
           <button>Ir a administrar personal Técnico</button>
         </Link>
       </div>
-      <div className='table-container'>
+      <div className="table-container">
         <table className="table-manage-projects-container">
           <thead>
             <tr className="table-manage-projects-header">
@@ -39,32 +39,29 @@ export const TablesProjects = () => {
             </tr>
           </thead>
 
-
-
-
-        {projects &&
-          projects.map((project) => {
-            return (
-              <tbody key={project._id}>
-                <tr className="table-manage-projects-body">
-                  <td>{project.name}</td>
-                  <td>{project.status}</td>
-                  <td> {project.groupsId.length} </td>
-                  <td>{project.techniciansId.length}</td>
-                  <td>
-                    <div className="table-btn-options">
-                      <Link to={`/home/project/${project._id}`}>
-                        <button className="table-btn-view">Ver</button>
-                      </Link>
-                      <button className="table-btn-delete">Borrar</button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            );
-          })}
-      </table>
-
+          {projects &&
+            projects.map((project) => {
+              return (
+                <tbody key={project._id}>
+                  <tr className="table-manage-projects-body">
+                    <td>{project.name}</td>
+                    <td>{project.status}</td>
+                    <td> {project.groupsId.length} </td>
+                    <td>{project.techniciansId.length}</td>
+                    <td>
+                      <div className="table-btn-options">
+                        <Link to={`/home/project/${project._id}`}>
+                          <button className="table-btn-view">Ver</button>
+                        </Link>
+                        <button className="table-btn-delete">Borrar</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              );
+            })}
+        </table>
+      </div>
     </div>
   );
 };
