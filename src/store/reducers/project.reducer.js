@@ -1,6 +1,7 @@
 const initialState = {
   newProject: null,
   projects: null,
+  currentProject: null,
 };
 
 export const projectReducer = (state = initialState, action) => {
@@ -14,6 +15,16 @@ export const projectReducer = (state = initialState, action) => {
       return {
         ...state,
         projects: action.payload,
+      };
+    case 'GET_PROJECT_ID':
+      return {
+        ...state,
+        currentProject: action.payload,
+      };
+    case 'CLEAR_CURRENT_PROJECT':
+      return {
+        ...state,
+        currentProject: null,
       };
 
     default:

@@ -8,26 +8,31 @@ import { TechnicianPage } from './pages/TechnicianPage';
 import { HOME, LANDINPAGE, PROJECT, TECHNICIANS } from './routes/path';
 import { LandingPage } from './pages/LandingPage';
 import { ProjectPage } from './pages/ProjectPage';
-import { PublicRouteLanding } from './routes/PublicRouteLanding';
-import { PrivateRouteHome } from './routes/PrivateRouteHome';
+import { PublicRoute } from './routes/PublicRoute';
+import { PrivateRoute } from './routes/PrivateRoute';
+import { useSelector } from 'react-redux';
+import { AuthRoutes } from './routes/AuthRoutes';
 
 function App() {
   const dispatch = useDispatch();
+  const { checking } = useSelector((state) => state.authReducer);
 
   useEffect(() => {
     dispatch(startChecking());
   }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<PublicRouteLanding />}>
-          <Route path={LANDINPAGE} element={<LandingPage />} />
-        </Route>
-        <Route path={HOME} element={<PrivateRouteHome />}>
-          <Route path={HOME} element={<HomePage />} />
-          <Route path={TECHNICIANS} element={<TechnicianPage />} />
-          <Route path={PROJECT} element={<ProjectPage />} />
-        </Route>
+        <Route
+          path={LANDINPAGE}
+          element={
+            <PublicRoute>
+              <LandingPage />
+            </PublicRoute>
+          }
+        />
+        <Route path="/home/*" element={<AuthRoutes />} />
       </Routes>
     </BrowserRouter>
   );

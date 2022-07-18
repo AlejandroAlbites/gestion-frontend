@@ -11,6 +11,8 @@ export const TablesProjects = () => {
 
   const { projects } = useSelector((state) => state.projectReducer);
 
+  //getProjectIdAction
+
   return (
     <div className="div-manage-projects-container">
       <div className="div-btn-container">
@@ -37,29 +39,31 @@ export const TablesProjects = () => {
             </tr>
           </thead>
 
-          {projects &&
-            projects.map((project) => {
-              return (
-                <tbody key={project.id}>
-                  <tr className="table-manage-projects-body">
-                    <td>{project.name}</td>
-                    <td>{project.status}</td>
-                    <td> {project.groupsId.length} </td>
-                    <td>{project.techniciansId.length}</td>
-                    <td>
-                      <div className="table-btn-options">
-                        <Link to={PROJECT}>
-                          <button className="table-btn-view">Ver</button>
-                        </Link>
-                        <button className="table-btn-delete">Borrar</button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              );
-            })}
-        </table>
-      </div>
+
+
+
+        {projects &&
+          projects.map((project) => {
+            return (
+              <tbody key={project._id}>
+                <tr className="table-manage-projects-body">
+                  <td>{project.name}</td>
+                  <td>{project.status}</td>
+                  <td> {project.groupsId.length} </td>
+                  <td>{project.techniciansId.length}</td>
+                  <td>
+                    <div className="table-btn-options">
+                      <Link to={`/home/project/${project._id}`}>
+                        <button className="table-btn-view">Ver</button>
+                      </Link>
+                      <button className="table-btn-delete">Borrar</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            );
+          })}
+      </table>
 
     </div>
   );

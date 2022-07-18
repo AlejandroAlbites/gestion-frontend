@@ -1,11 +1,45 @@
-import React, { useState } from 'react';
-import initialData from '../components/projectPage/initial-data';
+import React, { useEffect, useState } from 'react';
 import { Groups } from '../components/projectPage/Groups';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import '../assets/styles/pages/ProjectPage.scss';
+import { Modal } from '@mantine/core';
+import { useParams } from 'react-router-dom';
+import {
+  clearCurrentProject,
+  getProjectIdAction,
+} from '../store/actions/actionsProject';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { ModaWelcomeProject } from '../components/projectPage/ModaWelcomeProject';
+import { ModalCreateGroup } from '../components/projectPage/ModalCreateGroup';
+import { ModalAddOrRemovetech } from '../components/projectPage/ModalAddOrRemovetech';
+import { getGroupssAction } from '../store/actions/actionsGroup';
 
 export const ProjectPage = () => {
-  const [state, setState] = useState(initialData);
+  const dispatch = useDispatch();
+  const { currentProject } = useSelector((state) => state.projectReducer);
+  const [state, setState] = useState(null);
+  const [openedWelcomeProject, setOpenedWelcomeProject] = useState(false);
+  const [openedCreateGroup, setOpenedCreateGroup] = useState(false);
+  const [openedAddOrRemoveTech, setOpenedAddOrRemoveTech] = useState(false);
+
+  const { id } = useParams();
+  useEffect(() => {
+    dispatch(getProjectIdAction(id));
+    dispatch(getGroupssAction(id));
+    return () => {
+      dispatch(clearCurrentProject());
+    };
+  }, []);
+  useEffect(() => {
+    if (currentProject) {
+      setState(currentProject);
+      const countGroup = Object.keys(currentProject.groups).length;
+      if (countGroup === 0) {
+        setOpenedWelcomeProject(true);
+      }
+    }
+  }, [currentProject]);
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
@@ -120,48 +154,78 @@ export const ProjectPage = () => {
       },
     });
   };
+
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <div className="status-container">
-        {state.statusOrder.map((statusId) => {
-          const statusOrder = state.status[statusId];
-          return (
-            <Droppable
-              key={statusOrder.id}
-              droppableId={statusOrder.id}
-              direction="horizontal"
-              type="group">
-              {(provided) => {
-                return (
-                  <div className="div-status-groups-container">
-                    <h2>{statusOrder.title}</h2>
-                    <div
-                      className="div-groups-droppable-container"
-                      {...provided.droppableProps}
-                      ref={provided.innerRef}>
-                      {statusOrder.groupsIds.map((groupId, index) => {
-                        const group = state.groups[groupId];
-                        const technicals = group.techIds.map(
-                          (techId) => state.technicals[techId]
-                        );
-                        return (
-                          <Groups
-                            key={group.id}
-                            group={group}
-                            technicals={technicals}
-                            index={index}
-                          />
-                        );
-                      })}
-                      {provided.placeholder}
-                    </div>
-                  </div>
-                );
-              }}
-            </Droppable>
-          );
-        })}
-      </div>
-    </DragDropContext>
+    <main className="">
+      <Modal
+        opened={openedWelcomeProject}
+        onClose={() => setOpenedWelcomeProject(false)}
+        title="Bienvenido">
+        <ModaWelcomeProject setOpenedWelcomeProject={setOpenedWelcomeProject} />
+      </Modal>
+      <Modal
+        opened={openedCreateGroup}
+        onClose={() => setOpenedCreateGroup(false)}
+        title="Crear un Grupo de Trabajo">
+        <ModalCreateGroup setOpenedCreateGroup={setOpenedCreateGroup} />
+      </Modal>
+      <button onClick={() => setOpenedCreateGroup(true)}>
+        + Crear Nuevo Grupo
+      </button>
+      <Modal
+        opened={openedAddOrRemoveTech}
+        onClose={() => setOpenedAddOrRemoveTech(false)}
+        title="Busca el técnico que desees agregar o remover">
+        <ModalAddOrRemovetech
+          setOpenedAddOrRemoveTech={setOpenedAddOrRemoveTech}
+        />
+      </Modal>
+      <button onClick={() => setOpenedAddOrRemoveTech(true)}>
+        + Agregar o Remover Técnico
+      </button>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <div className="status-container">
+          {state &&
+            state.statusOrder.map((statusId) => {
+              const status = state.status[statusId];
+              return (
+                <Droppable
+                  key={status.id}
+                  droppableId={status.id}
+                  direction="horizontal"
+                  type="group">
+                  {(provided) => {
+                    return (
+                      <div className="div-status-groups-container">
+                        <h2>{status.title}</h2>
+                        <div
+                          className="div-groups-droppable-container"
+                          {...provided.droppableProps}
+                          ref={provided.innerRef}>
+                          {status.groupsIds.map((groupId, index) => {
+                            const group = state.groups[groupId];
+                            const technicals = group.techIds.map(
+                              (techId) => state.technicals[techId]
+                            );
+                            return (
+                              <Groups
+                                key={group.id}
+                                group={group}
+                                technicals={technicals}
+                                index={index}
+                              />
+                            );
+                          })}
+                          {provided.placeholder}
+                        </div>
+                      </div>
+                    );
+                  }}
+                </Droppable>
+              );
+            })}
+        </div>
+      </DragDropContext>
+    </main>
   );
 };

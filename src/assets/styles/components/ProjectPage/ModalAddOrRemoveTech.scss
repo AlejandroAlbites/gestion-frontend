@@ -1,0 +1,79 @@
+
+.modalMembers__header{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 25px;
+}
+
+.div-search-technician-header{
+    padding: 5px 25px;
+    font-weight: 700;
+    font-size: 15px;
+    color: #42a5ff;
+}
+.div-search-technician-input{
+    width: 100%;
+    height: 38px;
+    border: 1px solid gray;
+    outline: none;
+    border-radius: 5px;
+    margin: 8px 0px;
+    padding-left: 10px;
+    &:focus{
+    box-shadow: 0 0 0 1px #1775F1, 0 0 0 4px #CCDFEE;
+
+    }
+    &::placeholder{ color: lightgray}
+}
+.div-search-container{
+    padding: 5px 25px;
+    font-weight: 700;
+    font-size: 15px;
+}
+.div-list-technician-container{
+    position: sticky;
+    margin-left: 27px;
+    width: 90%;
+    height: calc(100% - 150px);
+    background: #FFF;
+    overflow-y: auto;
+    scrollbar-width: none;
+    transition: all .3s ease;
+    z-index: 200;
+}
+
+.div-list-technician{
+    display: flex;
+    margin: 15px;
+    align-items: center;
+    justify-content: space-between;
+    div{
+        display: flex;
+        align-items: center;
+        h1{
+            font-size: 16px;
+        }
+        p{
+            margin-left: 10px;
+            color: gray;
+            font-size: 14px;
+        }
+    }
+    
+    button{
+        font-size: 14px;
+        background-color: #42a5ff;
+        color: white;
+        padding: 4px;
+        border-radius: 4px;
+        cursor: pointer;
+        &:hover{
+            background-color: #0075c2;
+        }
+    }
+}
+
+.p-technician-other-project{
+    color: gray;
+    font-size: 12px;
+}

@@ -3,15 +3,8 @@ import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
 import { HOME } from './path';
 
-export const PublicRouteLanding = () => {
+export const PublicRoute = ({ children }) => {
   const { isLogin } = useSelector((state) => state.authReducer);
 
-  if (isLogin) {
-    return <Navigate to={HOME} />;
-  }
-  return (
-    <div>
-      <Outlet />
-    </div>
-  );
+  return isLogin ? <Navigate to={`/home`} /> : children;
 };

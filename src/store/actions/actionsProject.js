@@ -68,3 +68,35 @@ const getProjects = (data) => ({
   type: 'GET_PROJECTS',
   payload: data,
 });
+
+export function getProjectIdAction(id) {
+  return async (dispatch) => {
+    try {
+      const token = localStorage.getItem('token') || '';
+      if (!token) {
+        return false;
+      }
+      const response = await axios.get(
+        `http://localhost:8080/api/project/getProject/${id}`,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      dispatch(getProjectId(response.data.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+const getProjectId = (data) => ({
+  type: 'GET_PROJECT_ID',
+  payload: data,
+});
+
+export const clearCurrentProject = () => ({
+  type: 'CLEAR_CURRENT_PROJECT',
+});
