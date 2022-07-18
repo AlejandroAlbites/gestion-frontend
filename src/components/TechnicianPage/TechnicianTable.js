@@ -25,23 +25,23 @@ export const TechnicianTable = () => {
           <button>Volver al administrador de proyectos</button>
         </Link>
       </div>
-      <table className="table-manage-projects-container">
-        <thead>
-          <tr className="table-manage-projects-header">
-            {/* <th><img TODO FALTA IMAGEN/></th> */}
-            <th>Nombres</th>
-            <th>Apellidos</th>
-            <th>DNI o Cedula</th>
-            <th>Puesto</th>
-            <th>Conocimiento</th>
-            <th>Velocidad</th>
-            <th>Liderazgo</th>
-            <th>Sociabilidad</th>
-            <th>Responsabilidad</th>
-            <th>Opciones</th>
-          </tr>
-        </thead>
-
+      <div className='table-container'>
+        <table className="table-manage-projects-container">
+          <thead>
+            <tr className="table-manage-projects-header">
+              {/* <th><img TODO FALTA IMAGEN/></th> */}
+              <th>Nombres</th>
+              <th>Apellidos</th>
+              <th>DNI o Cedula</th>
+              <th>Puesto</th>
+              <th>Conocimiento</th>
+              <th>Velocidad</th>
+              <th>Liderazgo</th>
+              <th>Sociabilidad</th>
+              <th>Responsabilidad</th>
+              <th>Opciones</th>
+            </tr>
+          </thead>
         {technicians &&
           technicians.map((technician) => {
             return (
@@ -68,6 +68,7 @@ export const TechnicianTable = () => {
             );
           })}
       </table>
+
     </div>
   );
 };

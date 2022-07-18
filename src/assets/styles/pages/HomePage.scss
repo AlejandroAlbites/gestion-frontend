@@ -1,31 +1,52 @@
-.main-home-page-container{
+@import "./../abstracts/mixins";
+@import "./../abstracts/variables";
+
+.main-container {
   position: absolute;
   background-color: white;
   display: flex;
   flex-direction: row;
-  height:100%;
+  height: 100%;
   width: 100%;
-  margin:0;
-  
 }
 
-.div-table-container{
-    margin-top: 10%;
-    margin-left: 5%;
-
+.container {
+  padding: 3.5rem 1.5rem 1.5rem 1.5rem;
+  width: 100%;
+  height: 100%;
+  @include md { 
+    padding: 1.5rem;
+  }
 }
 
-// .btn-logout{
-//     position: absolute;
-//     top: 30px;
-//     right: 50px;
-//     cursor: pointer;
-//         border: none;
-//         border-radius: 4px;
-//         background-color: #6DDBCD;
-//         color: white;
-//         padding: 4px 12px;
-//         &:hover{
-//             background-color: #3bbbaa;
-//         }
-// }
+.main-item-container {
+  padding: 1.5rem;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  border-radius: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #999;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

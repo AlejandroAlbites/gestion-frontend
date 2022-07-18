@@ -10,7 +10,7 @@ export function createTechnicianAction(data) {
         return false;
       }
       const response = await axios.post(
-        `http://localhost:8080/api/technician`,
+        `${BASE_URL}/api/technician`,
         {
           name: data.name,
           lastName: data.lastName,
@@ -46,7 +46,7 @@ export function getTechniciansAction() {
       if (!token) {
         return false;
       }
-      const response = await axios.get(`http://localhost:8080/api/technician`, {
+      const response = await axios.get(`${BASE_URL}/api/technician`, {
         headers: {
           authorization: `Bearer ${token}`,
         },

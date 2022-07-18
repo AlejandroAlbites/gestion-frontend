@@ -27,16 +27,20 @@ export const TablesProjects = () => {
           <button>Ir a administrar personal Técnico</button>
         </Link>
       </div>
-      <table className="table-manage-projects-container">
-        <thead>
-          <tr className="table-manage-projects-header">
-            <th>Nombre del Proyecto</th>
-            <th>Estado</th>
-            <th>Grupos</th>
-            <th>Personal Asignado</th>
-            <th>Opciones</th>
-          </tr>
-        </thead>
+      <div className='table-container'>
+        <table className="table-manage-projects-container">
+          <thead>
+            <tr className="table-manage-projects-header">
+              <th>Nombre del Proyecto</th>
+              <th>Estado</th>
+              <th>Grupos</th>
+              <th>Personal Asignado</th>
+              <th>Opciones</th>
+            </tr>
+          </thead>
+
+
+
 
         {projects &&
           projects.map((project) => {
@@ -60,6 +64,7 @@ export const TablesProjects = () => {
             );
           })}
       </table>
+
     </div>
   );
 };

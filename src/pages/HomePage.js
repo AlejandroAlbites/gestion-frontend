@@ -16,10 +16,12 @@ export const HomePage = () => {
     dispatch(getTechniciansAction());
   }, [dispatch]);
   return (
-    <main className="main-home-page-container">
+    <main className="main-container">
       <Aside />
-      <div className="div-table-container">
-        <TablesProjects />
+      <div className='container'>
+        <div className="main-item-container">
+          <TablesProjects />
+        </div>
       </div>
     </main>
   );
