@@ -10,10 +10,12 @@ export const TechnicianPage = () => {
     dispatch(getTechniciansAction());
   }, [dispatch]);
   return (
-    <main className="main-technician-page-container">
+    <main className="main-container">
       <Aside />
-      <div className="div-table-technician-container">
-        <TechnicianTable />
+      <div className='container'>
+        <div className="main-item-container">
+          <TechnicianTable />
+        </div>
       </div>
     </main>
   );

@@ -1,55 +1,120 @@
-.section-aside-container{
-    position: relative;
-    background-color: #6DDBCD;
-    width: 280px;
-    height: 100%;
+@import "./../../abstracts/mixins";
+@import "./../../abstracts/variables";
+
+.section-aside-container {
+    position: absolute;
+    background-color: #6ddbcd;
+    min-height: 100%;
+    display: none;
+    padding: 0.5rem;
+    z-index: 1;
+
+    @include md {
+        position: unset;
+        display: block;
+        width: 200px;
+    }
 }
 
-.div-aside-container{
+.active {
+    display: block;
+}
+
+.menu {
+    position: absolute;
+    cursor: pointer;
+    color: #6ddbcd;
+    padding: 1rem;
+    font-size: 1.8rem;
+    left: 15px;
+    display: block;
+    @include md {
+        display: none !important;
+    }
+}
+
+.menu.active {
+    display: hide;
+}
+
+.hide_menu {
+    display: block;
+    @include md {
+        display: none !important;
+    }
+}
+
+.div-aside-container {
     margin: 10px;
-    h1{
+    h1 {
         text-align: center;
         margin-top: 15px;
         color: white;
         font-weight: bolder;
     }
-    h2{     
+    h2 {
         margin-top: 15px;
         color: white;
         font-weight: bolder;
         font-size: 16px;
-        // text-shadow: 0px 0px 1px gray;
     }
-    hr{
+    hr {
         margin-top: 20px;
     }
-    span{
+    span {
         position: relative;
-        left: 90% ;
+        left: 90%;
         cursor: pointer;
         color: white;
         font-weight: bolder;
         font-size: 25px;
-        &:hover{
+        &:hover {
             color: rgb(71, 71, 71);
         }
     }
+
+    .info-summary {
+        h2 {
+            i {
+                color: rgb(71, 71, 71);
+            }
+        }
+
+        ul {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            li {
+                color: white;
+                i {
+                    color: rgb(71, 71, 71);
+                }
+            }
+        }
+    }
 }
-.div-logo-aside-container{
+.div-logo-aside-container {
     background-color: white;
-    border: none;
     box-shadow: 1px 1px 10px 0px gray;
-    border-radius: 20px;
-    margin-top: 15px;
-    img{
-        width: 250px;
-        height: 200px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    img {
+        width: 130px;
+        height: auto;
     }
 }
 
-.btn-user-options{
+.btn-user-options {
     cursor: pointer;
-    &:hover{
+    &:hover {
         color: rgb(71, 71, 71);
+    }
+    i {
+        color: rgb(71, 71, 71);
+        padding-right: 0.5rem;
     }
 }

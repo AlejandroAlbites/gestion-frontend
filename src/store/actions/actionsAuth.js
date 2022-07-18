@@ -7,15 +7,10 @@ export function loginUserAction(data) {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        `http://localhost:8080/auth/login`,
+        `${BASE_URL}/auth/login`,
         {
           email: data.email,
           password: data.password,
-        },
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
         }
       );
 
@@ -43,17 +38,12 @@ export function registerUserAction(data) {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        `http://localhost:8080/auth/register`,
+        `${BASE_URL}/auth/register`,
         {
           name: data.name,
           company: data.company,
           email: data.email,
           password: data.password,
-        },
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
         }
       );
 
@@ -85,7 +75,7 @@ export const startChecking = () => {
       if (!token) {
         return false;
       }
-      const response = await axios.get(`http://localhost:8080/auth/renew`, {
+      const response = await axios.get(`${BASE_URL}/auth/renew`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -122,8 +112,10 @@ export function getUsersIdAction() {
 
       const response = await axios.get(`${BASE_URL}/auth/user`, {
         headers: {
+          'Content-Type': 'text/plain',
           authorization: `Bearer ${token}`,
         },
+
       });
       dispatch(getUsersId(response.data.data));
     } catch (error) {
