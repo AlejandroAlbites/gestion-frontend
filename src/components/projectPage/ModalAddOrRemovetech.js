@@ -9,7 +9,7 @@ import '../../assets/styles/components/ProjectPage/ModalAddOrRemoveTech.scss';
 import { useParams } from 'react-router-dom';
 import { ListTechInModal } from './ListTechInModal';
 
-export const ModalAddOrRemovetech = () => {
+export const ModalAddOrRemovetech = ({ setOpenedAddOrRemoveTech }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -46,7 +46,11 @@ export const ModalAddOrRemovetech = () => {
       </div>
       <div className="div-list-technician-container">
         {search.map((technician) => (
-          <ListTechInModal key={technician._id} technician={technician} />
+          <ListTechInModal
+            key={technician._id}
+            technician={technician}
+            setOpenedAddOrRemoveTech={setOpenedAddOrRemoveTech}
+          />
         ))}
       </div>
     </section>

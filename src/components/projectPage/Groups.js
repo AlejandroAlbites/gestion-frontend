@@ -6,7 +6,12 @@ import { useSelector } from 'react-redux';
 export const Groups = ({ group, technicals, index }) => {
   const { groups } = useSelector((state) => state.groupReducer);
 
-  const isDragDisabled = group.id === groups[0]._id;
+  let initialGroup = '';
+  if (groups) {
+    initialGroup = groups[0]._id;
+  }
+  const isDragDisabled = group.id === initialGroup;
+
   return (
     <Draggable
       draggableId={group.id}
@@ -15,7 +20,9 @@ export const Groups = ({ group, technicals, index }) => {
       {(provided) => (
         <div
           className={
-            index === 0 ? 'div-group-technicals-list' : 'div-container-group'
+            initialGroup === group.id
+              ? 'div-group-technicals-list'
+              : 'div-container-group'
           }
           {...provided.draggableProps}
           ref={provided.innerRef}>
@@ -23,17 +30,21 @@ export const Groups = ({ group, technicals, index }) => {
           <Droppable droppableId={group.id} type="technical">
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
-                {technicals.map((technical, index) => (
-                  <Technicals
-                    key={technical.id}
-                    technical={technical}
-                    index={index}
-                  />
-                ))}
+                {technicals &&
+                  technicals.map((technical, index) => (
+                    <Technicals
+                      key={technical.id}
+                      technical={technical}
+                      index={index}
+                    />
+                  ))}
                 {provided.placeholder}
               </div>
             )}
           </Droppable>
+          {groups[0]._id !== group.id && (
+            <p className="p-group-details-options">Ver detalles</p>
+          )}
         </div>
       )}
     </Draggable>

@@ -3,7 +3,7 @@ import { Groups } from '../components/projectPage/Groups';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import '../assets/styles/pages/ProjectPage.scss';
 import { Modal } from '@mantine/core';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {
   clearCurrentProject,
   getProjectIdAction,
@@ -13,7 +13,17 @@ import { useSelector } from 'react-redux';
 import { ModaWelcomeProject } from '../components/projectPage/ModaWelcomeProject';
 import { ModalCreateGroup } from '../components/projectPage/ModalCreateGroup';
 import { ModalAddOrRemovetech } from '../components/projectPage/ModalAddOrRemovetech';
-import { getGroupssAction } from '../store/actions/actionsGroup';
+import {
+  dragGroupInStatus,
+  getGroupssAction,
+  updateOrderGroupsInStatus,
+} from '../store/actions/actionsGroup';
+import { Aside } from '../components/HomePage/Aside';
+import { HOME } from '../routes/path';
+import {
+  dragTechnicianInGroups,
+  updateOrderTechnicianInGroup,
+} from '../store/actions/actionsTechnician';
 
 export const ProjectPage = () => {
   const dispatch = useDispatch();
@@ -53,11 +63,19 @@ export const ProjectPage = () => {
     }
 
     // Drag and Drop DE GRUPOS ENTRE ESTADOS
+
     if (type === 'group') {
       const groupPositionStart = state.status[source.droppableId];
       const groupPositionFinish = state.status[destination.droppableId];
 
       if (groupPositionStart !== groupPositionFinish) {
+        dispatch(
+          dragGroupInStatus(
+            source.droppableId,
+            destination.droppableId,
+            draggableId
+          )
+        );
         const newOrderGroupStart = Array.from(groupPositionStart.groupsIds);
         newOrderGroupStart.splice(source.index, 1);
 
@@ -87,6 +105,14 @@ export const ProjectPage = () => {
       }
 
       // DND DE GRUPOS EN EL MISMO ESTADO
+      dispatch(
+        updateOrderGroupsInStatus(
+          source.droppableId,
+          draggableId,
+          source.index,
+          destination.index
+        )
+      );
       const groupInState = state.status[source.droppableId];
       const newOrderColumnStart = Array.from(groupInState.groupsIds);
       newOrderColumnStart.splice(source.index, 1);
@@ -112,7 +138,16 @@ export const ProjectPage = () => {
     const groupFinish = state.groups[destination.droppableId];
 
     // DND DE TECNICOS EN EL MISMO GRUPO
+
     if (groupStart === groupFinish) {
+      dispatch(
+        updateOrderTechnicianInGroup(
+          source.droppableId,
+          draggableId,
+          source.index,
+          destination.index
+        )
+      );
       const newTechOrderIds = Array.from(groupStart.techIds);
       newTechOrderIds.splice(source.index, 1);
       newTechOrderIds.splice(destination.index, 0, draggableId);
@@ -131,6 +166,17 @@ export const ProjectPage = () => {
       return;
     }
     // DND DE TECNICOS ENTRE GRUPOS
+    // if(source.droppableId !== destination.droppableId){
+
+    // }
+    dispatch(
+      dragTechnicianInGroups(
+        source.droppableId,
+        destination.droppableId,
+        draggableId
+      )
+    );
+
     const newTechOrderStart = Array.from(groupStart.techIds);
     newTechOrderStart.splice(source.index, 1);
     const newStart = {
@@ -156,76 +202,92 @@ export const ProjectPage = () => {
   };
 
   return (
-    <main className="">
-      <Modal
-        opened={openedWelcomeProject}
-        onClose={() => setOpenedWelcomeProject(false)}
-        title="Bienvenido">
-        <ModaWelcomeProject setOpenedWelcomeProject={setOpenedWelcomeProject} />
-      </Modal>
-      <Modal
-        opened={openedCreateGroup}
-        onClose={() => setOpenedCreateGroup(false)}
-        title="Crear un Grupo de Trabajo">
-        <ModalCreateGroup setOpenedCreateGroup={setOpenedCreateGroup} />
-      </Modal>
-      <button onClick={() => setOpenedCreateGroup(true)}>
-        + Crear Nuevo Grupo
-      </button>
-      <Modal
-        opened={openedAddOrRemoveTech}
-        onClose={() => setOpenedAddOrRemoveTech(false)}
-        title="Busca el técnico que desees agregar o remover">
-        <ModalAddOrRemovetech
-          setOpenedAddOrRemoveTech={setOpenedAddOrRemoveTech}
-        />
-      </Modal>
-      <button onClick={() => setOpenedAddOrRemoveTech(true)}>
-        + Agregar o Remover Técnico
-      </button>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <div className="status-container">
-          {state &&
-            state.statusOrder.map((statusId) => {
-              const status = state.status[statusId];
-              return (
-                <Droppable
-                  key={status.id}
-                  droppableId={status.id}
-                  direction="horizontal"
-                  type="group">
-                  {(provided) => {
-                    return (
-                      <div className="div-status-groups-container">
-                        <h2>{status.title}</h2>
-                        <div
-                          className="div-groups-droppable-container"
-                          {...provided.droppableProps}
-                          ref={provided.innerRef}>
-                          {status.groupsIds.map((groupId, index) => {
-                            const group = state.groups[groupId];
-                            const technicals = group.techIds.map(
-                              (techId) => state.technicals[techId]
-                            );
-                            return (
-                              <Groups
-                                key={group.id}
-                                group={group}
-                                technicals={technicals}
-                                index={index}
-                              />
-                            );
-                          })}
-                          {provided.placeholder}
-                        </div>
-                      </div>
-                    );
-                  }}
-                </Droppable>
-              );
-            })}
+    <main className="main-container">
+      <Aside />
+      <div className="container">
+        <div className="main-item-container">
+          <Modal
+            opened={openedWelcomeProject}
+            onClose={() => setOpenedWelcomeProject(false)}
+            title="Bienvenido">
+            <ModaWelcomeProject
+              setOpenedWelcomeProject={setOpenedWelcomeProject}
+            />
+          </Modal>
+          <Modal
+            opened={openedCreateGroup}
+            onClose={() => setOpenedCreateGroup(false)}
+            title="Crear un Grupo de Trabajo">
+            <ModalCreateGroup setOpenedCreateGroup={setOpenedCreateGroup} />
+          </Modal>
+
+          <Modal
+            opened={openedAddOrRemoveTech}
+            onClose={() => setOpenedAddOrRemoveTech(false)}
+            title="Busca el personal que desees agregar o remover">
+            <ModalAddOrRemovetech
+              setOpenedAddOrRemoveTech={setOpenedAddOrRemoveTech}
+            />
+          </Modal>
+          <div className="div-btn-project-container">
+            <div>
+              <button onClick={() => setOpenedCreateGroup(true)}>
+                + Crear Nuevo Grupo
+              </button>
+              <button onClick={() => setOpenedAddOrRemoveTech(true)}>
+                + Agregar o Remover Personal
+              </button>
+            </div>
+            <Link to={HOME}>
+              <button>Volver al administrador de proyectos</button>
+            </Link>
+          </div>
+          <DragDropContext onDragEnd={onDragEnd}>
+            <div className="status-container">
+              {state &&
+                state.statusOrder.map((statusId) => {
+                  const status = state.status[statusId];
+                  return (
+                    <Droppable
+                      key={status.id}
+                      droppableId={status.id}
+                      direction="horizontal"
+                      type="group">
+                      {(provided) => {
+                        return (
+                          <div className="div-status-groups-container">
+                            <h2>{status.title}</h2>
+                            <div
+                              className="div-groups-droppable-container"
+                              {...provided.droppableProps}
+                              ref={provided.innerRef}>
+                              {status.groupsIds.map((groupId, index) => {
+                                const group = state.groups[groupId];
+
+                                const technicals = group.techIds.map(
+                                  (techId) => state.technicals[techId]
+                                );
+                                return (
+                                  <Groups
+                                    key={group.id}
+                                    group={group}
+                                    technicals={technicals}
+                                    index={index}
+                                  />
+                                );
+                              })}
+                              {provided.placeholder}
+                            </div>
+                          </div>
+                        );
+                      }}
+                    </Droppable>
+                  );
+                })}
+            </div>
+          </DragDropContext>
         </div>
-      </DragDropContext>
+      </div>
     </main>
   );
 };

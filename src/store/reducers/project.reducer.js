@@ -1,6 +1,5 @@
 const initialState = {
-  newProject: null,
-  projects: null,
+  projects: [],
   currentProject: null,
 };
 
@@ -9,7 +8,7 @@ export const projectReducer = (state = initialState, action) => {
     case 'CREATE_PROJECT':
       return {
         ...state,
-        newProject: action.payload,
+        projects: [...state.projects, action.payload],
       };
     case 'GET_PROJECTS':
       return {
@@ -26,6 +25,27 @@ export const projectReducer = (state = initialState, action) => {
         ...state,
         currentProject: null,
       };
+    // case 'CREATE_GROUP':
+    //   const newGroup = [action.payload];
+    //   let group = {};
+    //   newGroup.forEach((item) => {
+    //     group[item._id] = {
+    //       id: item._id,
+    //       title: item.name,
+    //       techIds: item.techniciansId,
+    //     };
+    //   });
+    //   console.log(group);
+    //   console.log(state.currentProject);
+    //   // const groups = Object.assign(state.currentProject.groups, group);
+
+    //   return {
+    //     ...state,
+    //     currentProject: {
+    //       ...state.currentProject,
+    //       groups: { ...state.currentProject.groups, ...group },
+    //     },
+    //   };
 
     default:
       return state;

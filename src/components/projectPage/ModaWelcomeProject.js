@@ -16,7 +16,9 @@ export const ModaWelcomeProject = ({ setOpenedWelcomeProject }) => {
   const onSubmit = (data) => {
     const { name, description } = data;
     dispatch(createFirstGroupAction({ name, description, id }));
+
     setOpenedWelcomeProject(false);
+    window.location.reload();
   };
   return (
     <div>

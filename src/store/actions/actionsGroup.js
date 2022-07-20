@@ -23,16 +23,16 @@ export function createFirstGroupAction(data) {
           },
         }
       );
-
-      dispatch(firstGroup(response.data.data));
+      console.log(response.data.data);
+      dispatch(createGroup(response.data.data));
     } catch (error) {
       console.log(error);
     }
   };
 }
 
-const firstGroup = (data) => ({
-  type: 'CREATE_FIRST_GROUP',
+const createGroup = (data) => ({
+  type: 'CREATE_GROUP',
   payload: data,
 });
 
@@ -62,3 +62,65 @@ const getGroups = (data) => ({
   type: 'GET_GROUPS',
   payload: data,
 });
+
+export function dragGroupInStatus(startStateId, finishStateId, groupId) {
+  return async (dispatch) => {
+    try {
+      const token = localStorage.getItem('token') || '';
+      if (!token) {
+        return false;
+      }
+
+      const response = await axios.put(
+        `${BASE_URL}/api/project/dragGroup/${startStateId}/${finishStateId}/${groupId}`,
+        {},
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log(response.data);
+      // if (response.data.ok) {
+      // dispatch(
+      //   giveOrRemoveLike({
+      //     messageId: MessageId,
+      //     likes: response.data.like.likes,
+      //   })
+      // );
+      // }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function updateOrderGroupsInStatus(
+  statusId,
+  groupId,
+  startIndex,
+  finishIndex
+) {
+  return async (dispatch) => {
+    try {
+      const token = localStorage.getItem('token') || '';
+      if (!token) {
+        return false;
+      }
+
+      const response = await axios.put(
+        `${BASE_URL}/api/project/dragGroupInStatus/${statusId}/${groupId}/${startIndex}/${finishIndex}`,
+        {},
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}

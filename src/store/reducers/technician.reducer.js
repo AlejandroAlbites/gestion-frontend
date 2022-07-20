@@ -1,6 +1,6 @@
 const initialState = {
   newTechnician: null,
-  technicians: null,
+  technicians: [],
 };
 
 export const technicianReducer = (state = initialState, action) => {
@@ -8,7 +8,7 @@ export const technicianReducer = (state = initialState, action) => {
     case 'CREATE_TECHNICIAN':
       return {
         ...state,
-        newTechnician: action.payload,
+        technicians: [...state.technicians, action.payload],
       };
     case 'GET_TECHNICIANS':
       return {
