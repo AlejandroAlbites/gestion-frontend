@@ -72,9 +72,7 @@ export const startChecking = () => {
     dispatch({ type: 'LOADING_REVALIDATE', payload: true });
     try {
       const token = localStorage.getItem('token') || '';
-      if (!token) {
-        return false;
-      }
+
       const response = await axios.get(`${BASE_URL}/auth/renew`, {
         headers: {
           authorization: `Bearer ${token}`,
@@ -91,9 +89,9 @@ export const startChecking = () => {
         localStorage.setItem('token', response.data.token);
       }
     } catch (err) {
-      dispatch(finishChecking());
       console.log(err);
     }
+    dispatch(finishChecking());
     dispatch({ type: 'LOADING_REVALIDATE', payload: false });
   };
 };

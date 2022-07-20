@@ -1,10 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate, Outlet } from 'react-router-dom';
-import { HOME } from './path';
+import { Navigate } from 'react-router-dom';
+import { Loading } from '../components/Loading/Loading';
 
 export const PublicRoute = ({ children }) => {
-  const { isLogin } = useSelector((state) => state.authReducer);
+  const { isLogin, checking } = useSelector((state) => state.authReducer);
+
+  if (checking) {
+    return <Loading />;
+  }
 
   return isLogin ? <Navigate to={`/home`} /> : children;
 };

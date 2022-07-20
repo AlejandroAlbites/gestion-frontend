@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
+import { Loading } from '../components/Loading/Loading';
 import { HomePage } from '../pages/HomePage';
 import { ProjectPage } from '../pages/ProjectPage';
 import { TechnicianPage } from '../pages/TechnicianPage';
@@ -11,8 +12,9 @@ export const AuthRoutes = () => {
   const { checking } = useSelector((state) => state.authReducer);
 
   if (checking) {
-    return <div></div>;
+    return <Loading />;
   }
+  
   return (
     <Routes>
       <Route
