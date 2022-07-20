@@ -4,13 +4,16 @@ import logo1 from '../../assets/images/logo1.png';
 import { logoutUser } from '../../store/actions/actionsAuth';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 export const Aside = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [showAsideMenu, setShowAsideMenu] = useState(false);
 
   const handleClickLogout = () => {
     dispatch(logoutUser());
+    navigate('/')
   };
 
   const handleMenu = () => {
