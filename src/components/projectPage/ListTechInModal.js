@@ -4,12 +4,16 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import '../../assets/styles/components/ProjectPage/ModalAddOrRemoveTech.scss';
 import { addOrRemoveTechInProject } from '../../store/actions/actionsTechnician';
-export const ListTechInModal = ({ technician }) => {
+export const ListTechInModal = ({ technician, setOpenedAddOrRemoveTech }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { groups } = useSelector((state) => state.groupReducer);
   const handleAddOrRemoveTech = () => {
     dispatch(addOrRemoveTechInProject(technician._id, groups[0]._id));
+    setOpenedAddOrRemoveTech(false);
+    setTimeout(() => {
+      window.location.reload();
+    }, 500);
   };
   return (
     <div className="div-list-technician">

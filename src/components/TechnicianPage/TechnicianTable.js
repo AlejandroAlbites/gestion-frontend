@@ -3,7 +3,7 @@ import '../../assets/styles/components/TechnicianPage/TechnicianTable.scss';
 import { Modal } from '@mantine/core';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { HOME, PROJECT } from '../../routes/path';
+import { HOME } from '../../routes/path';
 import { ModalNewTechnician } from './ModalNewTechnician';
 
 export const TechnicianTable = () => {

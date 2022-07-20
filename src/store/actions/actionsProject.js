@@ -22,8 +22,6 @@ export function createProjectAction(data) {
         }
       );
 
-      //   console.log(response.data.data);
-
       dispatch(createProject(response.data.data));
     } catch (error) {
       console.log(error);

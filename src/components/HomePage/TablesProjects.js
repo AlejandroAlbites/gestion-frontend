@@ -4,7 +4,7 @@ import { Modal } from '@mantine/core';
 import { ModalNewProject } from './ModalNewProject';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { PROJECT, TECHNICIANS } from '../../routes/path';
+import { TECHNICIANS } from '../../routes/path';
 
 export const TablesProjects = () => {
   const [opened, setOpened] = useState(false);

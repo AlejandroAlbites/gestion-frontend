@@ -80,22 +80,60 @@ export function addOrRemoveTechInProject(techId, groupId) {
           },
         }
       );
-
       console.log(response.data);
-      // if (response.data.ok) {
-      // dispatch(
-      //   giveOrRemoveLike({
-      //     messageId: MessageId,
-      //     likes: response.data.like.likes,
-      //   })
-      // );
-      // }
     } catch (error) {
       console.log(error);
     }
   };
 }
-// const giveOrRemoveLike = (payload) => ({
-//   type: 'GIVE_OR_REMOVE_LIKE',
-//   payload: payload,
-// });
+
+export function dragTechnicianInGroups(startGroupId, finishGroupId, techId) {
+  return async (dispatch) => {
+    try {
+      const token = localStorage.getItem('token') || '';
+      if (!token) {
+        return false;
+      }
+
+      const response = await axios.put(
+        `${BASE_URL}/api/project/group/${startGroupId}/${finishGroupId}/${techId}`,
+        {},
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function updateOrderTechnicianInGroup(
+  groupId,
+  technicianId,
+  startIndex,
+  finishIndex
+) {
+  return async (dispatch) => {
+    try {
+      const token = localStorage.getItem('token') || '';
+      if (!token) {
+        return false;
+      }
+
+      const response = await axios.put(
+        `${BASE_URL}/api/project/dragTechnician/${groupId}/${technicianId}/${startIndex}/${finishIndex}`,
+        {},
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
