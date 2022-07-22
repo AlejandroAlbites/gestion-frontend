@@ -5,13 +5,12 @@ import { ModalNewProject } from './ModalNewProject';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { TECHNICIANS } from '../../routes/path';
+import { StatusProject } from './StatusProject';
 
 export const TablesProjects = () => {
   const [opened, setOpened] = useState(false);
 
   const { projects } = useSelector((state) => state.projectReducer);
-
-  //getProjectIdAction
 
   return (
     <div className="div-manage-projects-container">
@@ -24,7 +23,7 @@ export const TablesProjects = () => {
         </Modal>
         <button onClick={() => setOpened(true)}>+ Crear Nuevo Proyecto</button>
         <Link to={TECHNICIANS}>
-          <button>Ir a administrar personal Técnico</button>
+          <button>Ir a Administrar Personal</button>
         </Link>
       </div>
       <div className="table-container">
@@ -45,7 +44,9 @@ export const TablesProjects = () => {
                 <tbody key={project._id}>
                   <tr className="table-manage-projects-body">
                     <td>{project.name}</td>
-                    <td>{project.status}</td>
+                    <td>
+                      <StatusProject projectId={project._id} />
+                    </td>
                     <td> {project.groupsId.length} </td>
                     <td>{project.techniciansId.length}</td>
                     <td>

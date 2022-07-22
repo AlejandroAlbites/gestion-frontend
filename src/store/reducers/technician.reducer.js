@@ -15,7 +15,24 @@ export const technicianReducer = (state = initialState, action) => {
         ...state,
         technicians: action.payload,
       };
-
+    case 'IMAGE_TECHNICIAN':
+      return {
+        ...state,
+        technicianImage: action.payload,
+      };
+    case 'CLEAR_CURRENT_IMAGE':
+      return {
+        ...state,
+        technicianImage: null,
+      };
+    case 'UPDATE_TECHNICIAN':
+      const technicians = state.technicians.map((technician) =>
+        technician._id === action.payload._id ? action.payload : technician
+      );
+      return {
+        ...state,
+        technicians,
+      };
     default:
       return state;
   }

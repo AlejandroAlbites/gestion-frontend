@@ -1,3 +1,5 @@
+@import "./../../abstracts/mixins";
+@import "./../../abstracts/variables";
 .mainForm {
     display: flex;
     flex-direction: column;
@@ -49,13 +51,16 @@
     padding: 10px;
     color: #606060;
     margin-top: 4px;
+    &::placeholder{
+      color: lightgray
+    }
   }
   
   .button-form-login-register{
     padding: 10px;
     max-width: 400px;
     width: 100%;
-    background-color: #42A5FF;
+    background-color: $btnCyan;
     color: white;
     font-weight: 500;
     border-radius: 5px;
@@ -65,7 +70,7 @@
     margin-top: 20px;
   
     &:hover {
-      background-color: #0075c2;
+      background-color: $btnCyanHover;
     }
   }
   
@@ -74,3 +79,76 @@
     font-size: 12px;
   }
   
+
+  .mainForm__rf-slider{
+    display: flex;
+    
+    .div-slider-container{
+      width: 90%;
+      margin-right: 10px;
+    }
+  }
+
+  .technician-image-upload{
+    display: flex;
+    align-items: center;
+   
+  }
+
+  .div__preview-image-technician{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    img{
+      margin-left: 10px;
+      margin-right: 20px;
+      width: 100px;
+      height: 120px;
+      box-shadow: 1px 1px 2px 0px gray;
+      border-radius: 10%;
+      border: 1px solid lightgray;
+    }
+    p{
+
+    border: none;   
+    padding: 4px 12px;
+    color: gray;
+    margin-bottom: 10px;
+
+    }
+  }
+
+  .span__button-upload-technician{
+    cursor: pointer;
+    border: none;   
+    border-radius: 4px;
+    padding: 4px 12px;
+    background-color: $btnCyan;
+    color: white;
+    width: 140px;
+    &:hover {
+            background-color: $btnCyanHover;
+        }
+  }
+
+  .container-submit-image-technician{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    div{
+       flex: 0 1 50%;
+    }
+  }
+
+  .div-image-technician{ 
+    margin-left: 10px;
+    margin-right: 20px;
+    width: 100px;
+    height: 120px;
+    box-shadow: 1px 1px 2px 0px gray;
+    border-radius: 10%;
+    border: 1px solid lightgray;
+  }
