@@ -1,19 +1,28 @@
 import React from 'react';
+import { Modal } from '@mantine/core';
 import '../../assets/styles/components/HomePage/Aside.scss';
 import logo1 from '../../assets/images/logo1.png';
 import { logoutUser } from '../../store/actions/actionsAuth';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { ModalEditUser } from './ModalEditUser';
 export const Aside = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [showAsideMenu, setShowAsideMenu] = useState(false);
+  const [opened, setOpened] = useState(false);
+
+  const { user } = useSelector((state) => state.authReducer);
+  const { technicians } = useSelector((state) => state.technicianReducer);
+  const { allGroups } = useSelector((state) => state.groupReducer);
+  const { projects } = useSelector((state) => state.projectReducer);
 
   const handleClickLogout = () => {
     dispatch(logoutUser());
-    navigate('/')
+    navigate('/');
   };
 
   const handleMenu = () => {
@@ -34,36 +43,44 @@ export const Aside = () => {
               onClick={() => handleMenu()}></i>
           </span>
           <div className="div-logo-aside-container">
-            <img src={logo1} alt="logo1" loading="lazy" />
+            <img src={user && user.image} alt="logo1" loading="lazy" />
           </div>
           <div className="info-summary">
-            <h1>EASE GROUP</h1>
+            <h1> {user && user.company} </h1>
             <h2>Información</h2>
             <ul>
               <li>
-                <i className="fa-solid fa-check"></i> Nombre: Juan{' '}
+                <i className="fa-solid fa-check"></i> {user && user.name}{' '}
               </li>
               <li>
-                <i className="fa-solid fa-check"></i> Correo : correo@correo.com{' '}
+                <i className="fa-solid fa-check"></i> {user && user.email}
               </li>
               <li>
-                <i className="fa-solid fa-check"></i> Proyectos: 0
+                <i className="fa-solid fa-check"></i> Proyectos:
+                {projects.length}
               </li>
               <li>
-                <i className="fa-solid fa-check"></i> Grupos de trabajo: 10{' '}
+                <i className="fa-solid fa-check"></i> Grupos: {allGroups.length}
               </li>
               <li>
-                <i className="fa-solid fa-check"></i> Personal Técnico: 32{' '}
+                <i className="fa-solid fa-check"></i> Personal:
+                {technicians.length}
               </li>
             </ul>
           </div>
           <div className="configuration">
             <h2 className="btn-user-options-title">Configuración</h2>
-            <h2 className="btn-user-options">
+            <Modal
+              opened={opened}
+              onClose={() => setOpened(false)}
+              title="Edita tu Perfil">
+              <ModalEditUser setOpened={setOpened} />
+            </Modal>
+            <h2 className="btn-user-options" onClick={() => setOpened(true)}>
               <i className="fa-solid fa-user-pen"></i>Editar Perfil
             </h2>
             <h2 className="btn-user-options">
-              <i className="fa-solid fa-key"></i>Cambiar Contraseña
+              <i className="fa-solid fa-key"></i> Mod. Contraseña
             </h2>
             <h2 className="btn-user-options">
               <i className="fa-solid fa-question"></i>Ver Ayuda

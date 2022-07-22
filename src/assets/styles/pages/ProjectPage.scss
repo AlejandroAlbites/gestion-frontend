@@ -44,7 +44,10 @@
     }
 
 }
-
+.technicals-container-initial-group{
+    min-height: 14px;
+    padding: 0px 16px;
+}
 .div-technical-container{
     border: 1px solid black;
     border-radius: 3px;
@@ -84,7 +87,7 @@
 .p-leader-group{
     background-color: lightgray;
     font-size: 11px;
-    padding: 0px;
+    padding: 0px 20px;
     margin: 0px;
     border-radius: 5px;
     
@@ -127,4 +130,13 @@
     &:hover{
         color: rgb(150, 150, 150);
     }
+}
+
+.p-group-action{
+    font-size: 10px;
+    color: rgb(71, 71, 71);
+}
+
+.span-loader-action{
+    margin-top: 4px;
 }

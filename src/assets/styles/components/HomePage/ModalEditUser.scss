@@ -1,0 +1,100 @@
+@import "./../../abstracts/mixins";
+@import "./../../abstracts/variables";
+.div-data-edit-container{
+    display: flex;
+    flex-direction: column;
+    label{
+        margin-top: 10px;
+        margin-right: 20px;
+    }
+
+
+}
+
+
+.span__button-upload{
+    cursor: pointer;
+    border: none;   
+    border-radius: 4px;
+    padding: 4px 12px;
+    background-color: $btnBlue;
+    color: white;
+    width: 140px;
+    margin-bottom: 10px;
+    &:hover {
+            background-color: $btnBlueHover;
+        }
+}
+
+.img__upload-image{
+    border-radius: 50%;
+    margin-left: 20px;
+    width: 120px;
+    height: 100px;
+    border: 1px solid gray;
+}
+
+.container-submit-image{
+ margin-top: 15px;
+ display: flex;
+ div{
+    flex: 0 1 50%;
+ }
+
+}
+.show-image-profile{
+    display: flex;
+    flex-direction: column;
+}
+
+.div__preview-image{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    img{
+        border-radius: 50%;
+        margin-left: 20px;
+        width: 120px;
+        height: 100px;
+        border: 1px solid gray;
+    }
+    p{
+
+    border: none;   
+    padding: 4px 12px;
+    color: gray;
+    margin-bottom: 10px;
+
+    }
+}
+.button-save {
+    cursor: pointer;
+    margin-top: 10px;
+    background-color: $btnCyan;
+    color: #fff;
+    border: none;   
+    border-radius: 4px;
+    padding: 4px 12px;
+    &:hover{
+        background-color: $btnCyanHover;
+    }
+  }
+  .button-nosave {
+    margin-top: 10px;
+    background-color: #0d4e7a;
+    color: #fff;
+    cursor: default;
+    border: none;   
+    border-radius: 4px;
+    padding: 4px 12px;
+  }
+
+  .button-footer{
+    display: flex;
+    justify-content: center;
+  }
+
+
+  

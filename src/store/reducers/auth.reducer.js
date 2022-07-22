@@ -38,7 +38,21 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         checking: false,
       };
-
+    case 'GET_USER_ID':
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case 'UPDATE_IMAGE':
+      return {
+        ...state,
+        imageProfile: action.payload,
+      };
+    case 'UPDATE_USER_PROFILE':
+      return {
+        ...state,
+        user: action.payload,
+      };
     case 'LOGOUT_USER':
       return initialState;
     default:
