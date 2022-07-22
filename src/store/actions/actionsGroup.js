@@ -10,7 +10,7 @@ export function createFirstGroupAction(data) {
         return false;
       }
       const response = await axios.post(
-        `http://localhost:8080/api/project/group`,
+        `${BASE_URL}/api/project/group`,
         {
           name: data.name,
           description: data.description,
@@ -43,14 +43,11 @@ export function getGroupssAction(id) {
       if (!token) {
         return false;
       }
-      const response = await axios.get(
-        `http://localhost:8080/api/project/groups/${id}`,
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(`${BASE_URL}/api/project/groups/${id}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
 
       dispatch(getGroups(response.data.groups));
     } catch (error) {
@@ -60,6 +57,30 @@ export function getGroupssAction(id) {
 }
 const getGroups = (data) => ({
   type: 'GET_GROUPS',
+  payload: data,
+});
+
+export function getAllGroupsAction() {
+  return async (dispatch) => {
+    try {
+      const token = localStorage.getItem('token') || '';
+      if (!token) {
+        return false;
+      }
+      const response = await axios.get(`${BASE_URL}/api/groups`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+
+      dispatch(getAllGroups(response.data.AllGroups));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+const getAllGroups = (data) => ({
+  type: 'GET_ALL_GROUPS',
   payload: data,
 });
 
@@ -80,21 +101,18 @@ export function dragGroupInStatus(startStateId, finishStateId, groupId) {
           },
         }
       );
-
+      dispatch(updateStateGroup(response.data.groupUpdate));
       console.log(response.data);
-      // if (response.data.ok) {
-      // dispatch(
-      //   giveOrRemoveLike({
-      //     messageId: MessageId,
-      //     likes: response.data.like.likes,
-      //   })
-      // );
-      // }
     } catch (error) {
       console.log(error);
     }
   };
 }
+
+const updateStateGroup = (data) => ({
+  type: 'UPDATE_STATE_GROUP',
+  payload: data,
+});
 
 export function updateOrderGroupsInStatus(
   statusId,
@@ -124,3 +142,32 @@ export function updateOrderGroupsInStatus(
     }
   };
 }
+export function updateGroupScore(groupId, score) {
+  return async (dispatch) => {
+    try {
+      const token = localStorage.getItem('token') || '';
+      if (!token) {
+        return false;
+      }
+
+      const response = await axios.put(
+        `${BASE_URL}/api/project/group/${groupId}/${score}`,
+        {},
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response.data.data);
+      dispatch(updateScoreGroup(response.data.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+const updateScoreGroup = (data) => ({
+  type: 'UPDATE_SCORE_GROUP',
+  payload: data,
+});
