@@ -104,12 +104,16 @@ export function dragTechnicianInGroups(startGroupId, finishGroupId, techId) {
           },
         }
       );
+      dispatch(dragTechnician(response.data));
     } catch (error) {
       console.log(error);
     }
   };
 }
-
+const dragTechnician = (data) => ({
+  type: 'DRAG_TECHNICIAN',
+  payload: data,
+});
 export function updateOrderTechnicianInGroup(
   groupId,
   technicianId,
@@ -132,8 +136,13 @@ export function updateOrderTechnicianInGroup(
           },
         }
       );
+      dispatch(dragTechnicianIntoGroup(response.data.groupUpdate));
     } catch (error) {
       console.log(error);
     }
   };
 }
+const dragTechnicianIntoGroup = (data) => ({
+  type: 'DRAG_TECHNICIAN_INTO_GROUP',
+  payload: data,
+});
