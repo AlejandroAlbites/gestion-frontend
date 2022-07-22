@@ -3,7 +3,8 @@
 
 .section-aside-container {
     position: absolute;
-    background-color: #6ddbcd;
+    // background-color: #6ddbcd;
+    background-color: $bgCyan;
     min-height: 100vh;
     display: none;
     padding: 0.5rem;
@@ -69,14 +70,17 @@
         font-weight: bolder;
         font-size: 25px;
         &:hover {
-            color: rgb(71, 71, 71);
+            color: $black;
         }
     }
 
     .info-summary {
+        h1{
+            font-size: 18px;
+        }
         h2 {
             i {
-                color: rgb(71, 71, 71);
+                color: $btnCyanHover;
             }
         }
 
@@ -88,33 +92,35 @@
             li {
                 color: white;
                 i {
-                    color: rgb(71, 71, 71);
+                    color: $iconCyan;
                 }
             }
         }
     }
 }
 .div-logo-aside-container {
+    width: 130px;
+    height: 130px;
     background-color: white;
     box-shadow: 1px 1px 10px 0px gray;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
     img {
         width: 130px;
-        height: auto;
+        height: 130px;
+        border-radius: 50%;
     }
 }
 
 .btn-user-options {
     cursor: pointer;
     &:hover {
-        color: rgb(71, 71, 71);
+        color: $iconCyan;
     }
     i {
-        color: rgb(71, 71, 71);
+        color: $iconCyan;
         padding-right: 0.5rem;
     }
 }

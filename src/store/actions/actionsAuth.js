@@ -1,18 +1,15 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-
+import { uplodadImageProfile } from '../../helpers/CloudinaryImages';
 const BASE_URL = process.env.REACT_APP_URL_BACKEND;
 
 export function loginUserAction(data) {
   return async (dispatch) => {
     try {
-      const response = await axios.post(
-        `${BASE_URL}/auth/login`,
-        {
-          email: data.email,
-          password: data.password,
-        }
-      );
+      const response = await axios.post(`${BASE_URL}/auth/login`, {
+        email: data.email,
+        password: data.password,
+      });
 
       if (response.data.ok) {
         localStorage.setItem('token', response.data.token);
@@ -37,15 +34,12 @@ const loginUser = (login) => ({
 export function registerUserAction(data) {
   return async (dispatch) => {
     try {
-      const response = await axios.post(
-        `${BASE_URL}/auth/register`,
-        {
-          name: data.name,
-          company: data.company,
-          email: data.email,
-          password: data.password,
-        }
-      );
+      const response = await axios.post(`${BASE_URL}/auth/register`, {
+        name: data.name,
+        company: data.company,
+        email: data.email,
+        password: data.password,
+      });
 
       if (response.data.ok) {
         localStorage.setItem('token', response.data.token);
@@ -113,7 +107,6 @@ export function getUsersIdAction() {
           'Content-Type': 'text/plain',
           authorization: `Bearer ${token}`,
         },
-
       });
       dispatch(getUsersId(response.data.data));
     } catch (error) {
@@ -136,4 +129,45 @@ export const logoutUser = () => {
 
 const logout = () => ({
   type: 'LOGOUT_USER',
+});
+
+export function updateUserProfileAction(data) {
+  return async (dispatch) => {
+    try {
+      const token = localStorage.getItem('token') || '';
+      if (!token) {
+        return false;
+      }
+
+      const response = await axios.put(`${BASE_URL}/auth/edit`, data, {
+        headers: {
+          authorization: `Bearer ${token}`,
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      });
+      if (response.data.ok) {
+        dispatch(updateUserProfile(response.data.data));
+      }
+    } catch (error) {
+      console.log(error);
+      throw new Error('error');
+    }
+  };
+}
+
+const updateUserProfile = (userUpdated) => ({
+  type: 'UPDATE_USER_PROFILE',
+  payload: userUpdated,
+});
+
+export function updateImageAction(file) {
+  return async (dispatch) => {
+    const fileUrl = await uplodadImageProfile(file);
+    dispatch(updateImage(fileUrl));
+  };
+}
+
+const updateImage = (fileUrl) => ({
+  type: 'UPDATE_IMAGE',
+  payload: fileUrl,
 });
