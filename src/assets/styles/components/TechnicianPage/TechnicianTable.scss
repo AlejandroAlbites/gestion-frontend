@@ -21,7 +21,7 @@
         cursor: pointer;
         border: none;
         border-radius: 4px;
-        background-color: #6ddbcd;
+        background-color: $btnCyan;
         color: white;
         padding: 6px 4px;
         @include sm {
@@ -31,15 +31,16 @@
             width: auto;
         }
         &:hover {
-            background-color: #3bbbaa;
+            background-color: $btnCyanHover;
         }
     }
 }
 
 .table-manage-projects-header {
-    border-bottom: 2px solid #6ddbcd;
+    border-bottom: 2px solid $bgCyan;
     th {
         padding: 10px;
+        text-align: left;
     }
 }
 
@@ -53,37 +54,41 @@
 
 .table-btn-options {
     display: flex;
-    .table-btn-view {
-        cursor: pointer;
-        border: none;
-        border-radius: 4px;
-        background-color: #6ddbcd;
-        color: white;
-        padding: 4px 12px;
-        &:hover {
-            background-color: #3bbbaa;
-        }
+
+  
+}
+.table-btn-view {
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #6ddbcd;
+    color: white;
+    padding: 4px 12px;
+    
+    &:hover {
+        background-color: #3bbbaa;
     }
-    .table-btn-edit {
-        cursor: pointer;
-        border: none;
-        border-radius: 4px;
-        background-color: #f4c49c;
-        color: white;
-        padding: 4px 12px;
-        &:hover {
-            background-color: #f1a15f;
-        }
+}
+.table-btn-edit {
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #f4c49c;
+    color: white;
+    padding: 4px 12px;
+    margin: 4px;
+    &:hover {
+        background-color: #f1a15f;
     }
-    .table-btn-delete {
-        cursor: pointer;
-        border: none;
-        border-radius: 4px;
-        background-color: rgb(228, 0, 0);
-        color: white;
-        padding: 4px;
-        &:hover {
-            background-color: rgb(190, 0, 0);
-        }
+}
+.table-btn-delete {
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: rgb(228, 0, 0);
+    color: white;
+    padding: 4px;
+    &:hover {
+        background-color: rgb(190, 0, 0);
     }
 }

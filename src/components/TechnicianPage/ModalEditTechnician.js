@@ -9,10 +9,14 @@ import {
   createTechnicianAction,
   getTechniciansAction,
   newImagenTechnician,
+  updateTechnicianAction,
 } from '../../store/actions/actionsTechnician';
 import { useSelector } from 'react-redux';
 
-export const ModalNewTechnician = ({ setOpened }) => {
+export const ModalEditTechnician = ({
+  setOpenedEditTechnician,
+  technician,
+}) => {
   const [image, setImage] = useState(null);
   const [file, setFile] = useState(null);
 
@@ -35,16 +39,25 @@ export const ModalNewTechnician = ({ setOpened }) => {
   };
 
   const dispatch = useDispatch();
-  const [co, setCo] = useState(50);
-  const [ve, setVe] = useState(50);
-  const [li, setLi] = useState(50);
-  const [so, setSo] = useState(50);
-  const [re, setRe] = useState(50);
+
+  const [co, setCo] = useState(technician.statistics[0]);
+  const [ve, setVe] = useState(technician.statistics[1]);
+  const [li, setLi] = useState(technician.statistics[2]);
+  const [so, setSo] = useState(technician.statistics[3]);
+  const [re, setRe] = useState(technician.statistics[4]);
+
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      name: technician.name,
+      lastName: technician.lastName,
+      dni: technician.dni,
+      role: technician.role,
+    },
+  });
 
   const onSubmit = (data) => {
     const { name, lastName, role, dni } = data;
@@ -61,24 +74,24 @@ export const ModalNewTechnician = ({ setOpened }) => {
       responsabilidad,
     ];
 
-    let newTechnician;
+    let updateTechnician;
     if (technicianImage) {
-      newTechnician = {
+      updateTechnician = {
         name,
         lastName,
         role,
         dni,
         statistics,
-        technicianImage,
+        image: technicianImage,
       };
     } else {
-      newTechnician = { name, lastName, role, dni, statistics };
+      updateTechnician = { name, lastName, role, dni, statistics };
     }
 
-    dispatch(createTechnicianAction(newTechnician));
+    dispatch(updateTechnicianAction(updateTechnician, technician._id));
     dispatch(getTechniciansAction());
     dispatch(clearCurrentImage());
-    setOpened(false);
+    setOpenedEditTechnician(false);
   };
   return (
     <main className="mainForm">
@@ -181,48 +194,69 @@ export const ModalNewTechnician = ({ setOpened }) => {
         <p className="mainForm__form-label">Conocimento</p>
         <div className="mainForm__rf-slider">
           <div className="div-slider-container">
-            <Slider defaultValue={50} onChange={(val) => setCo(val)} />
+            <Slider
+              defaultValue={technician.statistics[0]}
+              onChange={(val) => setCo(val)}
+            />
           </div>
           <p>{co}</p>
         </div>
         <p className="mainForm__form-label">Velocidad</p>
         <div className="mainForm__rf-slider">
           <div className="div-slider-container">
-            <Slider defaultValue={50} onChange={(val) => setVe(val)} />
+            <Slider
+              defaultValue={technician.statistics[1]}
+              onChange={(val) => setVe(val)}
+            />
           </div>
           <p>{ve}</p>
         </div>
         <p className="mainForm__form-label">Liderazgo</p>
         <div className="mainForm__rf-slider">
           <div className="div-slider-container">
-            <Slider defaultValue={50} onChange={(val) => setLi(val)} />
+            <Slider
+              defaultValue={technician.statistics[2]}
+              onChange={(val) => setLi(val)}
+            />
           </div>
           <p>{li}</p>
         </div>
         <p className="mainForm__form-label">Sociabilidad</p>
         <div className="mainForm__rf-slider">
           <div className="div-slider-container">
-            <Slider defaultValue={50} onChange={(val) => setSo(val)} />
+            <Slider
+              defaultValue={technician.statistics[3]}
+              onChange={(val) => setSo(val)}
+            />
           </div>
           <p>{so}</p>
         </div>
         <p className="mainForm__form-label">Responsabilidad</p>
         <div className="mainForm__rf-slider">
           <div className="div-slider-container">
-            <Slider defaultValue={50} onChange={(val) => setRe(val)} />
+            <Slider
+              defaultValue={technician.statistics[4]}
+              onChange={(val) => setRe(val)}
+            />
           </div>
           <p>{re}</p>
         </div>
 
-        <div className="container-submit-image-technician">
-          <div className="technician-image-upload">
+        <div className="container-submit-image">
+          <div>
             <div className="show-image-profile">
               <span
                 type="button"
-                className="span__button-upload-technician"
+                className="span__button-upload"
                 onClick={handleUpdateImageProfile}>
-                Subir Foto
+                Cambiar Imagen
               </span>
+              <img
+                className="div-image-technician"
+                src={technician.image}
+                alt="edit you profile"
+                loading="lazy"
+              />
             </div>
             <div className="button-edit">
               <input
@@ -249,13 +283,13 @@ export const ModalNewTechnician = ({ setOpened }) => {
         <footer className="button-footer">
           {image && technicianImage ? (
             <button type="submit" className="button-save">
-              Crear Personal
+              Guardar Cambios
             </button>
           ) : image && !technicianImage ? (
-            <p className="button-nosave">Crear Personal</p>
+            <p className="button-nosave">Guardar Cambios</p>
           ) : (
             <button type="submit" className="button-save">
-              Crear Personal
+              Guardar Cambios
             </button>
           )}
         </footer>

@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { HOME } from '../../routes/path';
 import { ModalNewTechnician } from './ModalNewTechnician';
+import { TechnicianOptions } from './TechnicianOptions';
 
 export const TechnicianTable = () => {
   const [opened, setOpened] = useState(false);
@@ -17,10 +18,11 @@ export const TechnicianTable = () => {
         <Modal
           opened={opened}
           onClose={() => setOpened(false)}
-          title="Crea un nuevo Técnico">
+          title="Crea un nuevo Personal">
           <ModalNewTechnician setOpened={setOpened} />
         </Modal>
-        <button onClick={() => setOpened(true)}>+ Crear Nuevo Técnico</button>
+
+        <button onClick={() => setOpened(true)}>+ Crear Nuevo Personal</button>
         <Link to={HOME}>
           <button>Volver al administrador de proyectos</button>
         </Link>
@@ -29,16 +31,15 @@ export const TechnicianTable = () => {
         <table className="table-manage-projects-container">
           <thead>
             <tr className="table-manage-projects-header">
-              {/* <th><img TODO FALTA IMAGEN/></th> */}
               <th>Nombres</th>
               <th>Apellidos</th>
-              <th>DNI o Cedula</th>
+              <th># Documento</th>
               <th>Puesto</th>
-              <th>Conocimiento</th>
-              <th>Velocidad</th>
-              <th>Liderazgo</th>
-              <th>Sociabilidad</th>
-              <th>Responsabilidad</th>
+              <th>Con</th>
+              <th>Vel</th>
+              <th>Lid</th>
+              <th>Soc</th>
+              <th>Resp</th>
               <th>Opciones</th>
             </tr>
           </thead>
@@ -58,9 +59,7 @@ export const TechnicianTable = () => {
                     <td> {technician.statistics[4]}</td>
                     <td>
                       <div className="table-btn-options">
-                        <button className="table-btn-view">Ver Tarjeta</button>
-                        <button className="table-btn-edit">Editar</button>
-                        <button className="table-btn-delete">Borrar</button>
+                        <TechnicianOptions technician={technician} />
                       </div>
                     </td>
                   </tr>
