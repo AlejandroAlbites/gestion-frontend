@@ -1,0 +1,148 @@
+@import "./../../abstracts/mixins";
+@import "./../../abstracts/variables";
+
+.section-aside-container {
+    position: absolute;
+    // background-color: #6ddbcd;
+    background-color: $bgCyan;
+    min-height: 100vh;
+    display: none;
+    padding: 0.5rem;
+    z-index: 1;
+
+    @include md {
+        position: unset;
+        display: block;
+        width: 200px;
+    }
+}
+
+.active {
+    display: block;
+}
+
+.menu {
+    position: absolute;
+    cursor: pointer;
+    color: #6ddbcd;
+    padding: 1rem;
+    font-size: 1.8rem;
+    left: 15px;
+    display: block;
+    @include md {
+        display: none !important;
+    }
+}
+
+.menu.active {
+    display: block;
+}
+
+.hide_menu {
+    display: block;
+    @include md {
+        display: none !important;
+    }
+}
+
+.div-aside-container {
+    margin: 10px;
+    h1 {
+        text-align: center;
+        margin-top: 15px;
+        color: white;
+        font-weight: bolder;
+    }
+    h2 {
+        margin-top: 15px;
+        color: white;
+        font-weight: bolder;
+        font-size: 16px;
+    }
+    hr {
+        margin-top: 20px;
+    }
+    span {
+        position: relative;
+        left: 90%;
+        cursor: pointer;
+        color: white;
+        font-weight: bolder;
+        font-size: 25px;
+        &:hover {
+            color: $black;
+        }
+    }
+
+    .info-summary {
+        h1{
+            font-size: 18px;
+        }
+        h2 {
+            i {
+                color: $btnCyanHover;
+            }
+        }
+
+        ul {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            li {
+                color: white;
+                i {
+                    color: $iconCyan;
+                }
+            }
+        }
+    }
+}
+.div-logo-aside-container {
+    width: 130px;
+    height: 130px;
+    background-color: white;
+    box-shadow: 1px 1px 10px 0px gray;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+    }
+}
+
+.btn-user-options {
+    cursor: pointer;
+    &:hover {
+        color: $iconCyan;
+    }
+    i {
+        color: $iconCyan;
+        padding-right: 0.5rem;
+    }
+}
+
+.div-help{
+    text-align: center;
+    color: #03989e;
+    line-height: 30px;
+    h1{
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+    h2{
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    h3{
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    h4{
+        text-align: left;
+    }
+ 
+}

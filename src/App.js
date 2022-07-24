@@ -1,10 +1,37 @@
-import "./App.css";
+
+import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { startChecking } from './store/actions/actionsAuth';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { LANDINPAGE } from './routes/path';
+import { LandingPage } from './pages/LandingPage';
+import { PublicRoute } from './routes/PublicRoute';
+import { AuthRoutes } from './routes/AuthRoutes';
+
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(startChecking());
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <p>Hola</p>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path={LANDINPAGE}
+          element={
+            <PublicRoute>
+              <LandingPage />
+            </PublicRoute>
+          }
+        />
+        <Route path="/home/*" element={<AuthRoutes />} />
+      </Routes>
+    </BrowserRouter>
+
   );
 }
 

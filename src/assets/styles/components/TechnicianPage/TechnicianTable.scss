@@ -1,0 +1,122 @@
+@import "./../../abstracts/mixins";
+@import "./../../abstracts/variables";
+
+.div-manage-technician-container {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+.div-btn-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 8px;
+    gap: 0.5rem;
+    @include md {
+        flex-direction: row;
+    }
+    button {
+        width: 100%;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+        background-color: $btnCyan;
+        color: white;
+        padding: 6px 4px;
+        @include sm {
+            width: 30%;
+        }
+        @include md { 
+            width: auto;
+        }
+        &:hover {
+            background-color: $btnCyanHover;
+        }
+    }
+}
+
+.table-manage-projects-header {
+    border-bottom: 2px solid $bgCyan;
+    th {
+        padding: 10px;
+        text-align: left;
+    }
+}
+
+.table-manage-projects-body {
+    text-align: center;
+    td {
+        padding: 10px;
+        text-align: left;
+    }
+}
+
+.table-btn-options {
+    display: flex;
+
+  
+}
+.table-btn-view {
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #6ddbcd;
+    color: white;
+    padding: 4px 12px;
+    
+    &:hover {
+        background-color: #3bbbaa;
+    }
+}
+.table-btn-edit {
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #f4c49c;
+    color: white;
+    padding: 4px 12px;
+    margin: 4px;
+    &:hover {
+        background-color: #f1a15f;
+    }
+}
+.table-btn-delete {
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: rgb(228, 0, 0);
+    color: white;
+    padding: 4px;
+    &:hover {
+        background-color: rgb(190, 0, 0);
+    }
+}
+
+.table-btn-yes{
+    margin-left: 25px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: $btnBlue;
+    color: white;
+    padding: 4px 12px;
+    &:hover {
+        background-color: $btnBlueHover;
+    }
+}
+
+.div-modal-delete-technician-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: auto;
+    h1{
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    div{
+        margin-top: 20px;
+    }
+}
