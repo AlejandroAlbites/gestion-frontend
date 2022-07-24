@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import '../../assets/styles/components/HomePage/ModalEditUser.scss';
@@ -51,10 +52,17 @@ export const ModalEditUser = ({ setOpened }) => {
         userUpdated = { ...user, ...data };
       }
       await dispatch(updateUserProfileAction(userUpdated));
-
+      toast.info('Perfil Actualizado', {
+        position: 'top-center',
+        theme: 'colored',
+      });
       setOpened(false);
     } catch (err) {
       console.log(err);
+      toast.error('Ocurrio un Error, contacta con el administrador', {
+        position: 'top-center',
+        theme: 'colored',
+      });
     }
   };
   return (
@@ -75,7 +83,7 @@ export const ModalEditUser = ({ setOpened }) => {
               placeholder="Ingresa un nuevo nombre"
               {...register('name', {
                 required: true,
-                pattern: /^[a-z\d A-Z\d]{6,30}$/i,
+                pattern: /^[a-z\d A-Z\d]{4,30}$/i,
               })}
             />
             {errors.name?.type === 'required' && (
@@ -83,7 +91,7 @@ export const ModalEditUser = ({ setOpened }) => {
             )}
             {errors.name?.type === 'pattern' && (
               <p className="input__error">
-                ⚠ Enter full Name of minimum 6 characters and maximum 30
+                ⚠ Enter full Name of minimum 4 characters and maximum 30
               </p>
             )}
           </div>
@@ -97,7 +105,7 @@ export const ModalEditUser = ({ setOpened }) => {
               placeholder="Ingresa un nuevo nombre para tu empresa"
               {...register('company', {
                 required: true,
-                pattern: /^[a-z\d A-Z\d]{6,30}$/i,
+                pattern: /^[a-z\d A-Z\d]{3,30}$/i,
               })}
             />
             {errors.name?.type === 'required' && (
@@ -105,7 +113,7 @@ export const ModalEditUser = ({ setOpened }) => {
             )}
             {errors.company?.type === 'pattern' && (
               <p className="input__error">
-                ⚠ Enter company of minimum 6 characters and maximum 30
+                ⚠ Enter company of minimum 4 characters and maximum 30
               </p>
             )}
           </div>
@@ -163,6 +171,7 @@ export const ModalEditUser = ({ setOpened }) => {
           </button>
         )}
       </footer>
+      <ToastContainer />
     </form>
   );
 };

@@ -1,6 +1,7 @@
 const initialState = {
   newTechnician: null,
   technicians: [],
+  isLoadingTech: false,
 };
 
 export const technicianReducer = (state = initialState, action) => {
@@ -32,6 +33,19 @@ export const technicianReducer = (state = initialState, action) => {
       return {
         ...state,
         technicians,
+      };
+    case 'DESTROY_TECHNICIAN':
+      const destroyTechnician = state.technicians.filter(
+        (technician) => technician._id !== action.payload._id
+      );
+      return {
+        ...state,
+        technicians: destroyTechnician,
+      };
+    case 'LOADING_TECH':
+      return {
+        ...state,
+        isLoadingTech: action.payload,
       };
     default:
       return state;

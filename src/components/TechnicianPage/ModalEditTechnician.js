@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast, ToastContainer } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
@@ -91,6 +92,10 @@ export const ModalEditTechnician = ({
     dispatch(updateTechnicianAction(updateTechnician, technician._id));
     dispatch(getTechniciansAction());
     dispatch(clearCurrentImage());
+    toast.info('Personal Actualizado', {
+      position: 'top-center',
+      theme: 'colored',
+    });
     setOpenedEditTechnician(false);
   };
   return (
@@ -294,6 +299,7 @@ export const ModalEditTechnician = ({
           )}
         </footer>
       </form>
+      <ToastContainer />
     </main>
   );
 };

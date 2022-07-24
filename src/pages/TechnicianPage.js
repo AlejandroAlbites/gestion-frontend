@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Aside } from '../components/HomePage/Aside';
+import { ToastContainer } from 'react-toastify';
 import { TechnicianTable } from '../components/TechnicianPage/TechnicianTable';
 import '../assets/styles/pages/TechnicianPage.scss';
 import { getTechniciansAction } from '../store/actions/actionsTechnician';
@@ -19,6 +20,7 @@ export const TechnicianPage = () => {
           <TechnicianTable />
         </div>
       </div>
+      <ToastContainer />
     </main>
   );
 };

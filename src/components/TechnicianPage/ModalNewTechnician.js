@@ -76,7 +76,6 @@ export const ModalNewTechnician = ({ setOpened }) => {
     }
 
     dispatch(createTechnicianAction(newTechnician));
-    dispatch(getTechniciansAction());
     dispatch(clearCurrentImage());
     setOpened(false);
   };

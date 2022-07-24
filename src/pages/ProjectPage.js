@@ -3,6 +3,8 @@ import { Groups } from '../components/projectPage/Groups';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import '../assets/styles/pages/ProjectPage.scss';
 import { Modal } from '@mantine/core';
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Link, useParams } from 'react-router-dom';
 import {
   clearCurrentProject,
@@ -29,10 +31,14 @@ import {
 } from '../store/actions/actionsTechnician';
 import { ModalFinishTask } from '../components/projectPage/ModalFinishTask';
 import { getUsersIdAction } from '../store/actions/actionsAuth';
+import { Loader } from '@mantine/core';
 
 export const ProjectPage = () => {
   const dispatch = useDispatch();
-  const { currentProject } = useSelector((state) => state.projectReducer);
+  const { currentProject, projects, isLoadingProject } = useSelector(
+    (state) => state.projectReducer
+  );
+
   const [state, setState] = useState(null);
   const [openedWelcomeProject, setOpenedWelcomeProject] = useState(false);
   const [openedCreateGroup, setOpenedCreateGroup] = useState(false);
@@ -60,7 +66,9 @@ export const ProjectPage = () => {
       }
     }
   }, [currentProject]);
-  const { groups } = useSelector((state) => state.groupReducer);
+  const project = projects.find((item) => item._id === id);
+  const { groups, isLoadingGroup } = useSelector((state) => state.groupReducer);
+  const { isLoadingTech } = useSelector((state) => state.technicianReducer);
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
 
@@ -228,6 +236,14 @@ export const ProjectPage = () => {
           [newFinish.id]: newFinish,
         },
       });
+    } else {
+      toast.error(
+        'No se puede mover al personal cuando el grupo esta en ejecución',
+        {
+          position: 'top-center',
+          theme: 'colored',
+        }
+      );
     }
   };
 
@@ -235,8 +251,9 @@ export const ProjectPage = () => {
     <main className="main-container">
       <Aside />
       <div className="container">
-        <div className="main-item-container">
+        <div className="main-item-container-dnd">
           <Modal
+            withCloseButton={false}
             opened={openedWelcomeProject}
             onClose={() => setOpenedWelcomeProject(false)}
             title="Bienvenido">
@@ -262,12 +279,13 @@ export const ProjectPage = () => {
           <Modal
             opened={openedFinishTask}
             onClose={() => setOpenedFinishTask(false)}
-            title="Felicidades, has terminado el trabajo">
+            withCloseButton={false}>
             <ModalFinishTask
               dragGroupId={dragGroupId}
               setOpenedFinishTask={setOpenedFinishTask}
             />
           </Modal>
+          <h1 className="h1-title-project">{project && project.name}</h1>
           <div className="div-btn-project-container">
             <div>
               <button onClick={() => setOpenedCreateGroup(true)}>
@@ -277,6 +295,12 @@ export const ProjectPage = () => {
                 + Agregar o Remover Personal
               </button>
             </div>
+            {isLoadingTech && <Loader color="cyan" size="sm" variant="dots" />}
+            {isLoadingGroup && <Loader color="cyan" size="sm" variant="dots" />}
+            {isLoadingProject && (
+              <Loader color="cyan" size="sm" variant="dots" />
+            )}
+
             <Link to={HOME}>
               <button>Volver al administrador de proyectos</button>
             </Link>
@@ -327,6 +351,7 @@ export const ProjectPage = () => {
           </DragDropContext>
         </div>
       </div>
+      <ToastContainer />
     </main>
   );
 };

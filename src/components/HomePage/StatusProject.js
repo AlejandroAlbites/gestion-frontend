@@ -9,7 +9,7 @@ export const StatusProject = ({ projectId }) => {
   const isAction = groupsIntoProject
     .map((group) => group.status)
     .includes('En ejecución');
-  console.log(groupsIntoProject);
+
   return (
     <div>
       {isAction ? (

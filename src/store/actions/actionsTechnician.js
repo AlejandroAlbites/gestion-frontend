@@ -5,6 +5,7 @@ const BASE_URL = process.env.REACT_APP_URL_BACKEND;
 
 export function createTechnicianAction(data) {
   return async (dispatch) => {
+    dispatch({ type: 'LOADING_TECH', payload: true });
     try {
       const token = localStorage.getItem('token') || '';
       if (!token) {
@@ -32,6 +33,7 @@ export function createTechnicianAction(data) {
     } catch (error) {
       console.log(error);
     }
+    dispatch({ type: 'LOADING_TECH', payload: false });
   };
 }
 
@@ -81,6 +83,9 @@ export function addOrRemoveTechInProject(techId, groupId) {
           },
         }
       );
+      if (response.data.ok) {
+        window.location.reload();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -89,6 +94,7 @@ export function addOrRemoveTechInProject(techId, groupId) {
 
 export function dragTechnicianInGroups(startGroupId, finishGroupId, techId) {
   return async (dispatch) => {
+    dispatch({ type: 'LOADING_TECH', payload: true });
     try {
       const token = localStorage.getItem('token') || '';
       if (!token) {
@@ -106,14 +112,20 @@ export function dragTechnicianInGroups(startGroupId, finishGroupId, techId) {
       );
 
       dispatch(dragTechnician(response.data));
+      dispatch(dragTechnicianStart(response.data));
     } catch (error) {
       console.log(error);
     }
+    dispatch({ type: 'LOADING_TECH', payload: false });
   };
 }
 
 const dragTechnician = (data) => ({
   type: 'DRAG_TECHNICIAN',
+  payload: data,
+});
+const dragTechnicianStart = (data) => ({
+  type: 'DRAG_TECHNICIAN_INITIAL_POSITION',
   payload: data,
 });
 
@@ -124,6 +136,7 @@ export function updateOrderTechnicianInGroup(
   finishIndex
 ) {
   return async (dispatch) => {
+    dispatch({ type: 'LOADING_TECH', payload: true });
     try {
       const token = localStorage.getItem('token') || '';
       if (!token) {
@@ -144,6 +157,7 @@ export function updateOrderTechnicianInGroup(
     } catch (error) {
       console.log(error);
     }
+    dispatch({ type: 'LOADING_TECH', payload: false });
   };
 }
 
@@ -169,8 +183,8 @@ export const clearCurrentImage = () => ({
 });
 
 export function updateTechnicianAction(data, id) {
-  console.log(data, id);
   return async (dispatch) => {
+    dispatch({ type: 'LOADING_TECH', payload: true });
     try {
       const token = localStorage.getItem('token') || '';
       if (!token) {
@@ -194,10 +208,37 @@ export function updateTechnicianAction(data, id) {
       console.log(error);
       throw new Error('error');
     }
+    dispatch({ type: 'LOADING_TECH', payload: false });
   };
 }
 
 const updateTechnician = (technicianUpdated) => ({
   type: 'UPDATE_TECHNICIAN',
   payload: technicianUpdated,
+});
+
+export function destroyTechnicianAction(id) {
+  return async (dispatch) => {
+    dispatch({ type: 'LOADING_TECH', payload: true });
+    try {
+      const token = localStorage.getItem('token') || '';
+      if (!token) {
+        return false;
+      }
+      const response = await axios.delete(`${BASE_URL}/api/technician/${id}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+
+      dispatch(destroyTechnician(response.data.data));
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch({ type: 'LOADING_TECH', payload: false });
+  };
+}
+const destroyTechnician = (data) => ({
+  type: 'DESTROY_TECHNICIAN',
+  payload: data,
 });

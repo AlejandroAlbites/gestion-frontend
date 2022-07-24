@@ -5,6 +5,26 @@
     width: auto;
 }
 .div-container-group{
+    background-color: #ffcfa7;;
+    color: rgb(71, 71, 71);
+    margin: 4px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    width: 80px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 180px;
+    h2{
+        padding: 8px;
+        font-size: 13px;
+    }
+    .div-list-task{
+        padding: 4px;
+    }
+}
+.div-container-group-action{
     background-color: #ccfff8;
     color: rgb(71, 71, 71);
     margin: 4px;
@@ -28,7 +48,7 @@
 
 .div-group-technicals-list{
     color: rgb(71, 71, 71);
-    background-color: gray;
+    background-color: rgb(173, 173, 173);
     margin: 4px;
     border: 1px solid gray;
     border-radius: 4px;
@@ -47,6 +67,7 @@
 .technicals-container-initial-group{
     min-height: 14px;
     padding: 0px 16px;
+    width: 65px;
 }
 .div-technical-container{
     border: 1px solid black;
@@ -57,7 +78,7 @@
     flex-grow: 1;
     min-height: 20px;
     font-size: 12px;
-    // width: 80%;
+    // width: 65px;
     color: rgb(71, 71, 71);;
 }
 .status-container{
@@ -102,6 +123,30 @@
     @include md {
         flex-direction: row;
     }
+    div{
+        button {
+            width: 100%;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background-color: #6ddbcd;
+            color: white;
+            padding: 6px 4px;
+            margin-left: 10px;
+            margin-bottom: 5px; 
+            @include sm {
+                width: 30%;
+            }
+            @include md { 
+                width: auto;
+              
+               
+            }
+            &:hover {
+                background-color: #3bbbaa;
+            }
+        }
+    }
     button {
         width: 100%;
         cursor: pointer;
@@ -116,19 +161,21 @@
         }
         @include md { 
             width: auto;
+           
         }
         &:hover {
             background-color: #3bbbaa;
         }
     }
+
 }
 
 .p-group-details-options{
     font-size: 10px;
     cursor: pointer;
-    color: rgb(71, 71, 71);
+    color: rgb(97, 97, 97);
     &:hover{
-        color: rgb(150, 150, 150);
+        color: rgb(42, 42, 42);
     }
 }
 
@@ -139,4 +186,34 @@
 
 .span-loader-action{
     margin-top: 4px;
+}
+
+.h1-title-project{
+    color: $btnCyanHover;
+    font-size: 24px;
+    text-align: center;
+}
+
+.p-welcome-create-first-group{
+    background-color: lightblue;
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.div-finish-task-info{
+    background-color: lightblue;
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+    h1{
+        font-size: 20px;
+        margin-top: 10px;
+    }
+    p{
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+    }
 }

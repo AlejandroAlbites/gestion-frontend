@@ -24,7 +24,10 @@ export function createFirstGroupAction(data) {
         }
       );
       console.log(response.data.data);
-      dispatch(createGroup(response.data.data));
+      if (response.data.ok) {
+        dispatch(createGroup(response.data.data));
+        window.location.reload();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -86,6 +89,7 @@ const getAllGroups = (data) => ({
 
 export function dragGroupInStatus(startStateId, finishStateId, groupId) {
   return async (dispatch) => {
+    dispatch({ type: 'LOADING_GROUP', payload: true });
     try {
       const token = localStorage.getItem('token') || '';
       if (!token) {
@@ -102,10 +106,10 @@ export function dragGroupInStatus(startStateId, finishStateId, groupId) {
         }
       );
       dispatch(updateStateGroup(response.data.groupUpdate));
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
+    dispatch({ type: 'LOADING_GROUP', payload: false });
   };
 }
 
@@ -121,6 +125,7 @@ export function updateOrderGroupsInStatus(
   finishIndex
 ) {
   return async (dispatch) => {
+    dispatch({ type: 'LOADING_GROUP', payload: true });
     try {
       const token = localStorage.getItem('token') || '';
       if (!token) {
@@ -136,14 +141,15 @@ export function updateOrderGroupsInStatus(
           },
         }
       );
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
+    dispatch({ type: 'LOADING_GROUP', payload: false });
   };
 }
 export function updateGroupScore(groupId, score) {
   return async (dispatch) => {
+    dispatch({ type: 'LOADING_GROUP', payload: true });
     try {
       const token = localStorage.getItem('token') || '';
       if (!token) {
@@ -159,11 +165,12 @@ export function updateGroupScore(groupId, score) {
           },
         }
       );
-      console.log(response.data.data);
+
       dispatch(updateScoreGroup(response.data.data));
     } catch (error) {
       console.log(error);
     }
+    dispatch({ type: 'LOADING_GROUP', payload: false });
   };
 }
 

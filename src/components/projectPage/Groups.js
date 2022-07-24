@@ -24,7 +24,8 @@ export const Groups = ({ group, technicals, index }) => {
 
   const isDragDisabled = group.id === initialGroup;
 
-  const groupDB = groups.find((item) => item._id === group.id);
+  const groupDB = groups?.find((item) => item._id === group.id);
+  if (!groupDB) return <></>;
   return (
     <Draggable
       draggableId={group.id}
@@ -35,6 +36,8 @@ export const Groups = ({ group, technicals, index }) => {
           className={
             initialGroup === group.id
               ? 'div-group-technicals-list'
+              : groupDB.status === 'En ejecución'
+              ? 'div-container-group-action'
               : 'div-container-group'
           }
           {...provided.draggableProps}

@@ -17,7 +17,7 @@ export const ModalNewProject = ({ setOpened }) => {
   const onSubmit = (data) => {
     const { name } = data;
     dispatch(createProjectAction({ name }));
-    dispatch(getProjectsAction());
+
     setOpened(false);
   };
   return (
@@ -34,7 +34,7 @@ export const ModalNewProject = ({ setOpened }) => {
           placeholder="Ingresa el nombre de tu proyecto"
           {...register('name', {
             required: true,
-            pattern: /^[a-z\d A-Z\d]{6,30}$/i,
+            pattern: /^[a-z\d A-Z\d]{4,20}$/i,
           })}
         />
         {errors.name?.type === 'required' && (
@@ -42,8 +42,8 @@ export const ModalNewProject = ({ setOpened }) => {
         )}
         {errors.name?.type === 'pattern' && (
           <p className="input__error" data-cy="error-fullName-input">
-            ⚠ Introduzca un nombre con un mínimo de 6 caracteres y un máximo de
-            30
+            ⚠ Introduzca un nombre con un mínimo de 4 caracteres y un máximo de
+            20, sin caracteres especiales
           </p>
         )}
 

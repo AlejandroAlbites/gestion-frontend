@@ -6,9 +6,9 @@ import { Loading } from '../components/Loading/Loading';
 export const PublicRoute = ({ children }) => {
   const { isLogin, checking } = useSelector((state) => state.authReducer);
 
-  if (checking) {
-    return <Loading />;
-  }
+  // if (checking) {
+  //   return <Loading />;
+  // }
 
   return isLogin ? <Navigate to={`/home`} /> : children;
 };
