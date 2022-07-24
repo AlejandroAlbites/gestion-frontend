@@ -13,10 +13,16 @@ export const Footer = () => {
         </div>
         <div className="div-footer-icon">
           <span>
-            <i className="fa-brands fa-linkedin"></i>
+            <a href="https://github.com/AlejandroAlbites" target="_blank">
+              <i className="fa-brands fa-github-square"></i>
+            </a>
           </span>
           <span>
-            <i className="fa-brands fa-github-square"></i>
+            <a
+              href="https://www.linkedin.com/in/juan-alejandro-albites-tapia-316185112/"
+              target="_blank">
+              <i className="fa-brands fa-linkedin"></i>
+            </a>
           </span>
         </div>
       </div>
