@@ -6,6 +6,7 @@ import '../../assets/styles/components/LandingPage/RegisterForm.scss';
 import { createFirstGroupAction } from '../../store/actions/actionsGroup';
 export const ModalCreateGroup = ({ setOpenedCreateGroup }) => {
   const dispatch = useDispatch();
+
   const { id } = useParams();
   const {
     register,
@@ -16,8 +17,10 @@ export const ModalCreateGroup = ({ setOpenedCreateGroup }) => {
   const onSubmit = (data) => {
     const { name, description } = data;
     dispatch(createFirstGroupAction({ name, description, id }));
+
     setOpenedCreateGroup(false);
   };
+
   return (
     <div>
       <form className="mainForm__form" onSubmit={handleSubmit(onSubmit)}>
