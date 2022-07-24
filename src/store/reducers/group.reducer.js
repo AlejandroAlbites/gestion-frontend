@@ -1,6 +1,7 @@
 const initialState = {
-  groups: [],
+  groups: null,
   allGroups: [],
+  isLoadingGroup: false,
 };
 
 export const groupReducer = (state = initialState, action) => {
@@ -43,6 +44,16 @@ export const groupReducer = (state = initialState, action) => {
         ...state,
         groups: newTechnicianInGroup,
       };
+    case 'DRAG_TECHNICIAN_INITIAL_POSITION':
+      const newGroupOutTechnician = state.groups.map((group) =>
+        group._id === action.payload.startGroupUpdate._id
+          ? action.payload.startGroupUpdate
+          : group
+      );
+      return {
+        ...state,
+        groups: newGroupOutTechnician,
+      };
     case 'DRAG_TECHNICIAN_INTO_GROUP':
       const updateOrderIntoGroup = state.groups.map((group) =>
         group._id === action.payload._id ? action.payload : group
@@ -50,6 +61,11 @@ export const groupReducer = (state = initialState, action) => {
       return {
         ...state,
         groups: updateOrderIntoGroup,
+      };
+    case 'LOADING_GROUP':
+      return {
+        ...state,
+        isLoadingGroup: action.payload,
       };
 
     default:

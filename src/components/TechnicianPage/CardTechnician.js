@@ -8,6 +8,7 @@ export const CardTechnician = ({ technicianId }) => {
   const technician = technicians.find((item) => item._id === technicianId);
   return (
     <main className="main-card-technician-container">
+      <h1>Ficha del Personal</h1>
       <div className="div-card-technician-container">
         <img src={technician.image} />
         <div className="div-info-technician">

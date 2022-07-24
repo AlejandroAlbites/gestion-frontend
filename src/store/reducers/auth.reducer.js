@@ -5,6 +5,8 @@ const initialState = {
   name: null,
   email: null,
   company: null,
+  isLoginEdit: false,
+  changePassword: null,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -55,6 +57,17 @@ export const authReducer = (state = initialState, action) => {
       };
     case 'LOGOUT_USER':
       return initialState;
+
+    case 'LOADING_EDIT':
+      return {
+        ...state,
+        isLoginEdit: action.payload,
+      };
+    case 'CHANGE_PASSWORD':
+      return {
+        ...state,
+        changePassword: action.payload,
+      };
     default:
       return state;
   }

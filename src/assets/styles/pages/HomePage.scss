@@ -27,6 +27,16 @@
   background-color: white;
   border-radius: 1rem;
   box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+}
+.main-item-container-dnd {
+  padding: 1.5rem;
+  width: 100%;
+  min-height: 100%;
+  // height: calc(100vh - 120px);
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* width */

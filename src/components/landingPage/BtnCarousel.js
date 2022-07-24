@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../assets/styles/components/LandingPage/Carousel.scss';
-import leftArrow from '../../assets/images/Carrousel/left.png';
-import rightArrow from '../../assets/images/Carrousel/right.png';
+import leftArrow from '../../assets/images/Carrousel/left1.png';
+import rightArrow from '../../assets/images/Carrousel/right1.png';
 
 export const BtnCarousel = ({ direction, moveSlide }) => {
   return (

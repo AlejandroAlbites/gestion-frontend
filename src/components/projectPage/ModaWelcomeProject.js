@@ -14,15 +14,13 @@ export const ModaWelcomeProject = ({ setOpenedWelcomeProject }) => {
   } = useForm();
 
   const onSubmit = (data) => {
-    const { name, description } = data;
-    dispatch(createFirstGroupAction({ name, description, id }));
-
+    const { name } = data;
+    dispatch(createFirstGroupAction({ name, id }));
     setOpenedWelcomeProject(false);
-    window.location.reload();
   };
   return (
     <div>
-      <p>
+      <p className="p-welcome-create-first-group">
         Antes de iniciar a trabajar en tu proyecto es necesario crear tu primer
         grupo de trabajo, este grupo no podrá ser enviado a ejecución ya que
         funcionará como una banca de suplentes donde se añadirán inicialmente
@@ -30,7 +28,7 @@ export const ModaWelcomeProject = ({ setOpenedWelcomeProject }) => {
       </p>
       <form className="mainForm__form" onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="fullName" className="mainForm__form-label">
-          Nombre del grupo
+          Nombre del Grupo
         </label>
         <input
           className="mainForm__form-input"
@@ -40,7 +38,7 @@ export const ModaWelcomeProject = ({ setOpenedWelcomeProject }) => {
           placeholder="Nombres sugeridos: lista de personal, banca, suplentes"
           {...register('name', {
             required: true,
-            pattern: /^[a-z\d A-Z\d]{6,30}$/i,
+            pattern: /^[a-z\d A-Z\d]{4,20}$/i,
           })}
         />
         {errors.name?.type === 'required' && (
@@ -48,31 +46,10 @@ export const ModaWelcomeProject = ({ setOpenedWelcomeProject }) => {
         )}
         {errors.name?.type === 'pattern' && (
           <p className="input__error" data-cy="error-fullName-input">
-            ⚠ Introduzca un nombre con un mínimo de 6 caracteres y un máximo de
-            30
+            ⚠ Introduzca un nombre con un mínimo de 4 caracteres y un máximo de
+            20
           </p>
         )}
-        <input
-          className="mainForm__form-input"
-          type="text"
-          name="description"
-          id="description"
-          placeholder="Ingresa una breve descripción"
-          {...register('description', {
-            required: true,
-            pattern: /^[a-z\d A-Z\d]{6,30}$/i,
-          })}
-        />
-        {errors.description?.type === 'required' && (
-          <p className="input__error">⚠ El campo es requerido</p>
-        )}
-        {errors.description?.type === 'pattern' && (
-          <p className="input__error" data-cy="error-fullName-input">
-            ⚠ Introduzca un nombre con un mínimo de 6 caracteres y un máximo de
-            30
-          </p>
-        )}
-
         <input
           type="submit"
           value="Crear Grupo"

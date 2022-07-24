@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { Modal } from '@mantine/core';
-// import { CardTechnician } from '../TechnicianPage/CardTechnician';
+import { CardTechnician } from '../TechnicianPage/CardTechnician';
 import { useSelector } from 'react-redux';
 
 export const Technicals = ({ technical, index, group }) => {
@@ -19,16 +19,16 @@ export const Technicals = ({ technical, index, group }) => {
     <Draggable draggableId={technical.id} index={index}>
       {(provided) => (
         <div
-          className="div-technical-container"
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
+          className="div-technical-container"
           onDoubleClick={handleDoubleClick}>
           <Modal
             opened={opened}
             onClose={() => setOpened(false)}
-            title="Ficha del Personal">
-            {/* <CardTechnician technicianId={technical.id} />{' '} */}
+            withCloseButton={false}>
+            <CardTechnician technicianId={technical.id} />
           </Modal>
           {initialGroup !== group.id ? (
             <div>

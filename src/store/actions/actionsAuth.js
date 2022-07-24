@@ -1,5 +1,6 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import { toast } from 'react-toastify';
 import { uplodadImageProfile } from '../../helpers/CloudinaryImages';
 const BASE_URL = process.env.REACT_APP_URL_BACKEND;
 
@@ -17,11 +18,12 @@ export function loginUserAction(data) {
 
       dispatch(loginUser(response.data.user));
     } catch (error) {
-      console.log(error);
-      //   toast.error('the email or password is not correct', {
-      //     position: 'top-center',
-      //     theme: 'colored',
-      //   });
+      if (error.response.data.ok === false) {
+        toast.error('El correo o la contraseña no son correctos', {
+          position: 'top-center',
+          theme: 'colored',
+        });
+      }
     }
   };
 }
@@ -48,10 +50,6 @@ export function registerUserAction(data) {
       dispatch(registerUser(response.data.user));
     } catch (error) {
       console.log(error);
-      //   toast.error('Error - There is already a user with that email', {
-      //     position: 'top-center',
-      //     theme: 'colored',
-      //   });
     }
   };
 }
@@ -133,6 +131,7 @@ const logout = () => ({
 
 export function updateUserProfileAction(data) {
   return async (dispatch) => {
+    dispatch({ type: 'LOADING_EDIT', payload: true });
     try {
       const token = localStorage.getItem('token') || '';
       if (!token) {
@@ -152,6 +151,7 @@ export function updateUserProfileAction(data) {
       console.log(error);
       throw new Error('error');
     }
+    dispatch({ type: 'LOADING_EDIT', payload: false });
   };
 }
 
@@ -170,4 +170,35 @@ export function updateImageAction(file) {
 const updateImage = (fileUrl) => ({
   type: 'UPDATE_IMAGE',
   payload: fileUrl,
+});
+
+export const changePasswordAction = (data) => {
+  return async (dispatch) => {
+    try {
+      const token = localStorage.getItem('token') || '';
+      if (!token) {
+        return false;
+      }
+
+      const response = await axios.put(
+        `${BASE_URL}/auth/change-password`,
+        data,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        }
+      );
+
+      dispatch(changePassword(response.data.ok));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+const changePassword = (ok) => ({
+  type: 'CHANGE_PASSWORD',
+  payload: ok,
 });

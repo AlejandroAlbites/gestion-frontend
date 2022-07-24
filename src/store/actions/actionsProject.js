@@ -4,6 +4,7 @@ const BASE_URL = process.env.REACT_APP_URL_BACKEND;
 
 export function createProjectAction(data) {
   return async (dispatch) => {
+    dispatch({ type: 'LOADING_PROJECT', payload: true });
     try {
       const token = localStorage.getItem('token') || '';
       if (!token) {
@@ -25,11 +26,8 @@ export function createProjectAction(data) {
       dispatch(createProject(response.data.data));
     } catch (error) {
       console.log(error);
-      //   toast.error('the email or password is not correct', {
-      //     position: 'top-center',
-      //     theme: 'colored',
-      //   });
     }
+    dispatch({ type: 'LOADING_PROJECT', payload: false });
   };
 }
 const createProject = (data) => ({
@@ -39,6 +37,7 @@ const createProject = (data) => ({
 
 export function getProjectsAction() {
   return async (dispatch) => {
+    dispatch({ type: 'LOADING_PROJECT', payload: true });
     try {
       const token = localStorage.getItem('token') || '';
       if (!token) {
@@ -50,16 +49,11 @@ export function getProjectsAction() {
         },
       });
 
-      //   console.log(response.data.projects);
-
       dispatch(getProjects(response.data.projects));
     } catch (error) {
       console.log(error);
-      //   toast.error('the email or password is not correct', {
-      //     position: 'top-center',
-      //     theme: 'colored',
-      //   });
     }
+    dispatch({ type: 'LOADING_PROJECT', payload: false });
   };
 }
 const getProjects = (data) => ({
@@ -69,13 +63,14 @@ const getProjects = (data) => ({
 
 export function getProjectIdAction(id) {
   return async (dispatch) => {
+    dispatch({ type: 'LOADING_PROJECT', payload: true });
     try {
       const token = localStorage.getItem('token') || '';
       if (!token) {
         return false;
       }
       const response = await axios.get(
-        `http://localhost:8080/api/project/getProject/${id}`,
+        `${BASE_URL}/api/project/getProject/${id}`,
         {
           headers: {
             authorization: `Bearer ${token}`,
@@ -87,6 +82,7 @@ export function getProjectIdAction(id) {
     } catch (error) {
       console.log(error);
     }
+    dispatch({ type: 'LOADING_PROJECT', payload: false });
   };
 }
 
@@ -97,4 +93,30 @@ const getProjectId = (data) => ({
 
 export const clearCurrentProject = () => ({
   type: 'CLEAR_CURRENT_PROJECT',
+});
+
+export function destroyProjectAction(id) {
+  return async (dispatch) => {
+    dispatch({ type: 'LOADING_PROJECT', payload: true });
+    try {
+      const token = localStorage.getItem('token') || '';
+      if (!token) {
+        return false;
+      }
+      const response = await axios.delete(`${BASE_URL}/api/project/${id}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+
+      dispatch(destroyProject(response.data.data));
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch({ type: 'LOADING_PROJECT', payload: false });
+  };
+}
+const destroyProject = (data) => ({
+  type: 'DESTROY_PROJECT',
+  payload: data,
 });

@@ -8,12 +8,16 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ModalEditUser } from './ModalEditUser';
+import { ModalChangePassword } from './ModalChangePassword';
+import { ModalHelp } from './ModalHelp';
 export const Aside = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [showAsideMenu, setShowAsideMenu] = useState(false);
   const [opened, setOpened] = useState(false);
+  const [openedHelp, setOpenedHelp] = useState(false);
+  const [openedChangePassword, setOpenedChangePassword] = useState(false);
 
   const { user } = useSelector((state) => state.authReducer);
   const { technicians } = useSelector((state) => state.technicianReducer);
@@ -76,13 +80,31 @@ export const Aside = () => {
               title="Edita tu Perfil">
               <ModalEditUser setOpened={setOpened} />
             </Modal>
+            <Modal
+              opened={openedChangePassword}
+              onClose={() => setOpenedChangePassword(false)}
+              title="Cambia tu contraseña">
+              <ModalChangePassword
+                setOpenedChangePassword={setOpenedChangePassword}
+              />
+            </Modal>
+            <Modal
+              opened={openedHelp}
+              onClose={() => setOpenedHelp(false)}
+              overflow="inside">
+              <ModalHelp setOpenedHelp={setOpenedHelp} />
+            </Modal>
             <h2 className="btn-user-options" onClick={() => setOpened(true)}>
               <i className="fa-solid fa-user-pen"></i>Editar Perfil
             </h2>
-            <h2 className="btn-user-options">
+            <h2
+              className="btn-user-options"
+              onClick={() => setOpenedChangePassword(true)}>
               <i className="fa-solid fa-key"></i> Mod. Contraseña
             </h2>
-            <h2 className="btn-user-options">
+            <h2
+              className="btn-user-options"
+              onClick={() => setOpenedHelp(true)}>
               <i className="fa-solid fa-question"></i>Ver Ayuda
             </h2>
             <h2

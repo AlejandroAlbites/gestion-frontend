@@ -17,7 +17,6 @@ export const ModalCreateGroup = ({ setOpenedCreateGroup }) => {
     const { name, description } = data;
     dispatch(createFirstGroupAction({ name, description, id }));
     setOpenedCreateGroup(false);
-    window.location.reload();
   };
   return (
     <div>

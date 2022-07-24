@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import '../../assets/styles/components/LandingPage/Carousel.scss';
-// import ca1 from '../../assets/images/Carrousel/ca1';
-// import ca2 from '../../assets/images/Carrousel/ca2';
-// import ca3 from '../../assets/images/Carrousel/ca3';
 import { BtnCarousel } from './BtnCarousel';
 
 const dataCarousel = [
@@ -11,21 +8,21 @@ const dataCarousel = [
     title: 'Lorem ipsum',
     subTitle: 'Lorem',
     image:
-      'https://st2.depositphotos.com/2673929/8344/i/950/depositphotos_83445092-stock-photo-workplaces-in-a-modern-panoramic.jpg',
+      'https://res.cloudinary.com/drezhlbzo/image/upload/v1658647199/gbnhuoh7zlwy3iddhbkc.png',
   },
   {
     id: 2,
     title: 'Lorem ipsum',
     subTitle: 'Lorem',
     image:
-      'https://us.123rf.com/450wm/ismagilov/ismagilov1904/ismagilov190400228/120196765-interior-de-oficina-moderna-con-muebles-representaci%C3%B3n-3d-.jpg?ver=6',
+      'https://res.cloudinary.com/drezhlbzo/image/upload/v1658645878/tgzi060dgho5e3k0f6bs.png',
   },
   {
     id: 3,
     title: 'Lorem ipsum',
     subTitle: 'Lorem',
     image:
-      'https://img.lalr.co/cms/2022/01/28191612/Oficina-minimalista.png?size=xl&ratio=r40_21',
+      'https://res.cloudinary.com/drezhlbzo/image/upload/v1658646234/xvxg62qsogpzqkbssyta.png',
   },
 ];
 

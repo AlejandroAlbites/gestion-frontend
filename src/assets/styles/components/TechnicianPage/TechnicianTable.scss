@@ -92,3 +92,31 @@
         background-color: rgb(190, 0, 0);
     }
 }
+
+.table-btn-yes{
+    margin-left: 25px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: $btnBlue;
+    color: white;
+    padding: 4px 12px;
+    &:hover {
+        background-color: $btnBlueHover;
+    }
+}
+
+.div-modal-delete-technician-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: auto;
+    h1{
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    div{
+        margin-top: 20px;
+    }
+}

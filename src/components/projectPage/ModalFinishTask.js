@@ -16,7 +16,10 @@ export const ModalFinishTask = ({ dragGroupId, setOpenedFinishTask }) => {
   };
   return (
     <div>
-      <h1>Califica el trabajo de este grupo en un rango de 0 a 100 puntos</h1>
+      <div className="div-finish-task-info">
+        <h1>Felicidades, Terminaste el Trabajo</h1>
+        <p>Califica el trabajo de este grupo en un rango de 0 a 100 puntos</p>
+      </div>
       <h2 className="h2-title-score">{value}</h2>
       <Slider step={10} defaultValue={50} onChange={(val) => setValue(val)} />
       <button className="button-save-score" onClick={handleSaveScore}>

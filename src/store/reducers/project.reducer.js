@@ -1,6 +1,7 @@
 const initialState = {
   projects: [],
   currentProject: null,
+  isLoadingProject: false,
 };
 
 export const projectReducer = (state = initialState, action) => {
@@ -24,6 +25,19 @@ export const projectReducer = (state = initialState, action) => {
       return {
         ...state,
         currentProject: null,
+      };
+    case 'DESTROY_PROJECT':
+      const projects = state.projects.filter(
+        (project) => project._id !== action.payload._id
+      );
+      return {
+        ...state,
+        projects,
+      };
+    case 'LOADING_PROJECT':
+      return {
+        ...state,
+        isLoadingProject: action.payload,
       };
     // case 'CREATE_GROUP':
     //   const newGroup = [action.payload];

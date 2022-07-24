@@ -6,11 +6,14 @@ import { Link } from 'react-router-dom';
 import { HOME } from '../../routes/path';
 import { ModalNewTechnician } from './ModalNewTechnician';
 import { TechnicianOptions } from './TechnicianOptions';
+import { Loader } from '@mantine/core';
 
 export const TechnicianTable = () => {
   const [opened, setOpened] = useState(false);
 
-  const { technicians } = useSelector((state) => state.technicianReducer);
+  const { technicians, isLoadingTech } = useSelector(
+    (state) => state.technicianReducer
+  );
 
   return (
     <div className="div-manage-technician-container">
@@ -23,6 +26,7 @@ export const TechnicianTable = () => {
         </Modal>
 
         <button onClick={() => setOpened(true)}>+ Crear Nuevo Personal</button>
+        {isLoadingTech && <Loader color="cyan" size="sm" variant="dots" />}
         <Link to={HOME}>
           <button>Volver al administrador de proyectos</button>
         </Link>

@@ -1,4 +1,5 @@
-
+@import "./../../abstracts/mixins";
+@import "./../../abstracts/variables";
 .modalMembers__header{
     display: flex;
     justify-content: space-between;
@@ -60,15 +61,26 @@
         }
     }
     
-    button{
+    .btn-remove-project{
         font-size: 14px;
-        background-color: #42a5ff;
+        background-color: $btnOrange;
         color: white;
         padding: 4px;
         border-radius: 4px;
         cursor: pointer;
         &:hover{
-            background-color: #0075c2;
+            background-color: $btnOrangeHover;
+        }
+    }
+    .btn-add-project{
+        font-size: 14px;
+        background-color: $btnCyan;
+        color: white;
+        padding: 4px;
+        border-radius: 4px;
+        cursor: pointer;
+        &:hover{
+            background-color: $btnCyanHover;
         }
     }
 }
