@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { startChecking } from './store/actions/actionsAuth';
 import { useDispatch } from 'react-redux';
@@ -6,6 +7,7 @@ import { LANDINPAGE } from './routes/path';
 import { LandingPage } from './pages/LandingPage';
 import { PublicRoute } from './routes/PublicRoute';
 import { AuthRoutes } from './routes/AuthRoutes';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +30,7 @@ function App() {
         <Route path="/home/*" element={<AuthRoutes />} />
       </Routes>
     </BrowserRouter>
+
   );
 }
 
