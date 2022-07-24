@@ -8,7 +8,11 @@ export const BtnCarousel = ({ direction, moveSlide }) => {
     <span
       onClick={moveSlide}
       className={direction === 'next' ? 'btn-slide next' : 'btn-slide prev'}>
-      <img src={direction === 'next' ? rightArrow : leftArrow} />
+      <img
+        src={direction === 'next' ? rightArrow : leftArrow}
+        alt="img-carousel"
+        loading="lazy"
+      />
     </span>
   );
 };

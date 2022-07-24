@@ -2,10 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import '../../assets/styles/components/LandingPage/RegisterForm.scss';
-import {
-  createProjectAction,
-  getProjectsAction,
-} from '../../store/actions/actionsProject';
+import { createProjectAction } from '../../store/actions/actionsProject';
 export const ModalNewProject = ({ setOpened }) => {
   const dispatch = useDispatch();
   const {

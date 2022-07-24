@@ -1,7 +1,6 @@
 import React from 'react';
 import { Modal } from '@mantine/core';
 import '../../assets/styles/components/HomePage/Aside.scss';
-import logo1 from '../../assets/images/logo1.png';
 import { logoutUser } from '../../store/actions/actionsAuth';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';

@@ -7,7 +7,6 @@ import 'rc-slider/assets/index.css';
 import '../../assets/styles/components/LandingPage/RegisterForm.scss';
 import {
   clearCurrentImage,
-  createTechnicianAction,
   getTechniciansAction,
   newImagenTechnician,
   updateTechnicianAction,
