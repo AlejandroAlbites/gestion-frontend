@@ -43,7 +43,7 @@ export const ModalChangePassword = () => {
       dispatch(logoutUser());
       navigate('/');
     }
-  }, [passValidator]);
+  }, [passValidator, dispatch, navigate]);
 
   return (
     <main className="mainForm">

@@ -1,4 +1,3 @@
-import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { startChecking } from './store/actions/actionsAuth';
 import { useDispatch } from 'react-redux';

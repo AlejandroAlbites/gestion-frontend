@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { Loading } from '../components/Loading/Loading';
@@ -14,7 +14,7 @@ export const AuthRoutes = () => {
   if (checking) {
     return <Loading />;
   }
-  
+
   return (
     <Routes>
       <Route

@@ -23,7 +23,7 @@ export function createFirstGroupAction(data) {
           },
         }
       );
-      console.log(response.data.data);
+
       if (response.data.ok) {
         dispatch(createGroup(response.data.data));
         window.location.reload();
