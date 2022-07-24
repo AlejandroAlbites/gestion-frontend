@@ -7,7 +7,6 @@ import '../../assets/styles/components/LandingPage/RegisterForm.scss';
 import {
   clearCurrentImage,
   createTechnicianAction,
-  getTechniciansAction,
   newImagenTechnician,
 } from '../../store/actions/actionsTechnician';
 import { useSelector } from 'react-redux';
