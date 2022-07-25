@@ -8,7 +8,7 @@ const dataCarousel = [
     title: 'Lorem ipsum',
     subTitle: 'Lorem',
     image:
-      'https://res.cloudinary.com/drezhlbzo/image/upload/v1658647199/gbnhuoh7zlwy3iddhbkc.png',
+      'https://res.cloudinary.com/drezhlbzo/image/upload/v1658713374/cgpkmsi4nge5g4oasfgk.png',
   },
   {
     id: 2,
