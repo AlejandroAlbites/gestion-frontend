@@ -1,7 +1,8 @@
 const initialState = {
-  groups: null,
+  groups: [],
   allGroups: [],
   isLoadingGroup: false,
+  isLoadingCreateGroup: false,
 };
 
 export const groupReducer = (state = initialState, action) => {
@@ -66,6 +67,11 @@ export const groupReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoadingGroup: action.payload,
+      };
+    case 'LOADING_CREATE_GROUP':
+      return {
+        ...state,
+        isLoadingCreateGroup: action.payload,
       };
 
     default:
