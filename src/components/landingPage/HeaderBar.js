@@ -34,7 +34,7 @@ export const HeaderBar = () => {
                 Easy Group es una web creada a partir de una necesidad, ya que
                 al manejar gran cantidad de grupos de trabajo se vuelve un poco
                 difícil seguir el progreso de trabajo de cada grupo, si al grupo
-                le esta yendo bien o no, entonces te haces la pregunta, ¿cúando
+                le esta yendo bien o no, entonces te haces la pregunta, ¿cuándo
                 es necesario replantear un grupo?
               </h3>
               <h3>

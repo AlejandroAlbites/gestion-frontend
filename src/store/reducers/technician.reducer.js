@@ -2,6 +2,7 @@ const initialState = {
   newTechnician: null,
   technicians: [],
   isLoadingTech: false,
+  isLoadingAddTech: false,
 };
 
 export const technicianReducer = (state = initialState, action) => {
@@ -46,6 +47,11 @@ export const technicianReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoadingTech: action.payload,
+      };
+    case 'LOADING_ADD_TECH':
+      return {
+        ...state,
+        isLoadingAddTech: action.payload,
       };
     default:
       return state;

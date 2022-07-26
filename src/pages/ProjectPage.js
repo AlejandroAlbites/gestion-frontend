@@ -38,7 +38,12 @@ export const ProjectPage = () => {
   const { currentProject, projects, isLoadingProject } = useSelector(
     (state) => state.projectReducer
   );
-
+  const { groups, isLoadingGroup, isLoadingCreateGroup } = useSelector(
+    (state) => state.groupReducer
+  );
+  const { isLoadingTech, isLoadingAddTech } = useSelector(
+    (state) => state.technicianReducer
+  );
   const [state, setState] = useState(null);
   const [openedWelcomeProject, setOpenedWelcomeProject] = useState(false);
   const [openedCreateGroup, setOpenedCreateGroup] = useState(false);
@@ -46,6 +51,7 @@ export const ProjectPage = () => {
   const [openedFinishTask, setOpenedFinishTask] = useState(false);
   const [dragGroupId, setDragGroupId] = useState('');
   const { id } = useParams();
+
   useEffect(() => {
     dispatch(getProjectsAction());
     dispatch(getUsersIdAction());
@@ -56,19 +62,19 @@ export const ProjectPage = () => {
     return () => {
       dispatch(clearCurrentProject());
     };
-  }, []);
+  }, [isLoadingCreateGroup, isLoadingAddTech]);
+
   useEffect(() => {
     if (currentProject) {
       setState(currentProject);
       const countGroup = Object.keys(currentProject.groups).length;
-      if (countGroup === 0) {
+      if (countGroup === 0 && !isLoadingCreateGroup) {
         setOpenedWelcomeProject(true);
       }
     }
   }, [currentProject]);
   const project = projects.find((item) => item._id === id);
-  const { groups, isLoadingGroup } = useSelector((state) => state.groupReducer);
-  const { isLoadingTech } = useSelector((state) => state.technicianReducer);
+
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
 

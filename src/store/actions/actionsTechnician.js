@@ -68,6 +68,7 @@ const getTechnicians = (data) => ({
 
 export function addOrRemoveTechInProject(techId, groupId) {
   return async (dispatch) => {
+    dispatch({ type: 'LOADING_ADD_TECH', payload: true });
     try {
       const token = localStorage.getItem('token') || '';
       if (!token) {
@@ -83,12 +84,10 @@ export function addOrRemoveTechInProject(techId, groupId) {
           },
         }
       );
-      if (response.data.ok) {
-        window.location.reload();
-      }
     } catch (error) {
       console.log(error);
     }
+    dispatch({ type: 'LOADING_ADD_TECH', payload: false });
   };
 }
 

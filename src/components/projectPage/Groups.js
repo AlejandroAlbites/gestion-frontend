@@ -13,7 +13,7 @@ export const Groups = ({ group, technicals, index }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   let initialGroup = '';
-  if (groups) {
+  if (groups.length > 0) {
     initialGroup = groups[0]._id;
   }
 
@@ -46,7 +46,7 @@ export const Groups = ({ group, technicals, index }) => {
           <Droppable droppableId={group.id} type="technical">
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
-                {technicals &&
+                {technicals.length > 0 &&
                   technicals.map((technical, index) => (
                     <Technicals
                       key={technical.id}
