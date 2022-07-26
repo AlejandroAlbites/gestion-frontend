@@ -4,6 +4,7 @@ const BASE_URL = process.env.REACT_APP_URL_BACKEND;
 
 export function createFirstGroupAction(data) {
   return async (dispatch) => {
+    dispatch({ type: 'LOADING_CREATE_GROUP', payload: true });
     try {
       const token = localStorage.getItem('token') || '';
       if (!token) {
@@ -26,11 +27,11 @@ export function createFirstGroupAction(data) {
 
       if (response.data.ok) {
         dispatch(createGroup(response.data.data));
-        window.location.reload();
       }
     } catch (error) {
       console.log(error);
     }
+    dispatch({ type: 'LOADING_CREATE_GROUP', payload: false });
   };
 }
 

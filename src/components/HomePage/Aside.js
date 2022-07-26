@@ -66,7 +66,7 @@ export const Aside = () => {
                 <i className="fa-solid fa-check"></i> Grupos: {allGroups.length}
               </li>
               <li>
-                <i className="fa-solid fa-check"></i> Personal:
+                <i className="fa-solid fa-check"></i> Personal:{' '}
                 {technicians.length}
               </li>
             </ul>
